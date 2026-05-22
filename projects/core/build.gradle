@@ -2,12 +2,12 @@ plugins {
     id 'java-library'
 }
 
-description = 'PostgreSQL protocol adapter for MiniConnect'
+description = 'PostgreSQL integration core building blocks'
 
 tasks.withType(JavaCompile).configureEach {
     options.release = 8
 }
 
 dependencies {
-    api "hu.webarticum.miniconnect.api:api:${miniConnectApiVersion}"
+    api "hu.webarticum.miniconnect.api:lang:${miniConnectApiVersion}"
 }

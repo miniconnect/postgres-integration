@@ -2,9 +2,10 @@ plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0'
 }
 
-rootProject.name = 'miniconnect-postgres'
+rootProject.name = 'postgres-integration'
 
 include 'core'
+include 'miniconnect-postgres'
 
 rootProject.children.each { project ->
     project.projectDir = new File(settingsDir, "projects/${project.name}")

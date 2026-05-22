@@ -9,7 +9,7 @@ description = 'PostgreSQL protocol adapter for MiniConnect'
 
 def groupName = 'hu.webarticum.miniconnect.postgres'
 
-def scmUrl = 'https://github.com/miniconnect/miniconnect-postgres.git'
+def scmUrl = 'https://github.com/miniconnect/postgres-integration.git'
 def websiteUrl = scmUrl.replaceAll(/\.git$/, "");
 
 def automaticVersion = '0.1.0-SNAPSHOT'

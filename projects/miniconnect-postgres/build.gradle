@@ -1,0 +1,21 @@
+plugins {
+    id 'java-library'
+    id 'application'
+    id 'com.gradleup.shadow' version '9.4.1'
+}
+
+description = 'PostgreSQL protocol adapter for MiniConnect'
+
+def serverMainClass = 'hu.webarticum.miniconnect.postgres.miniconnect.ServerMain'
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 8
+}
+
+dependencies {
+    api project(':core')
+}
+
+application {
+    mainClass = serverMainClass
+}
