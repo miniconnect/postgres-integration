@@ -4,9 +4,7 @@ import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Simple QueryMessage protocol request containing a query string.
- */
+/** Simple QueryMessage protocol request containing a query string. */
 public final class QueryMessage implements TaggedMessage, FrontendMessage {
 
     public static final int MESSAGE_TYPE = 'Q';
@@ -17,18 +15,14 @@ public final class QueryMessage implements TaggedMessage, FrontendMessage {
         this.query = Objects.requireNonNull(query, "query");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * QueryMessage string to execute using the Simple QueryMessage protocol.
-     */
-    public String getQuery() {
+    /** QueryMessage string to execute using the Simple QueryMessage protocol. */
+    public String query() {
         return query;
     }
 

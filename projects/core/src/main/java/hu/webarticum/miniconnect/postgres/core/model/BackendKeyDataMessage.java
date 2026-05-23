@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Cancellation key data for later CancelRequest messages.
- */
+/** Cancellation key data for later CancelRequest messages. */
 public final class BackendKeyDataMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'K';
@@ -21,25 +19,19 @@ public final class BackendKeyDataMessage implements TaggedMessage, BackendMessag
         this.secretKey = Objects.requireNonNull(secretKey, "secretKey");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Process ID of this backend.
-     */
-    public int getProcessId() {
+    /** Process ID of this backend. */
+    public int processId() {
         return processId;
     }
 
-    /**
-     * Secret key of this backend.
-     */
-    public ByteString getSecretKey() {
+    /** Secret key of this backend. */
+    public ByteString secretKey() {
         return secretKey;
     }
 

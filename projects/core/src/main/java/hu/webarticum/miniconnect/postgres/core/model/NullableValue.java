@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Protocol value with an explicit SQL NULL marker.
- */
+/** Protocol value with an explicit SQL NULL marker. */
 public final class NullableValue {
 
     private static final NullableValue NULL_VALUE = new NullableValue(true, ByteString.empty());
@@ -33,19 +31,13 @@ public final class NullableValue {
         return bytes == null ? nullValue() : of(bytes);
     }
 
-    /**
-     * Whether the value is SQL NULL.
-     */
+    /** Whether the value is SQL NULL. */
     public boolean isNull() {
         return nullValue;
     }
 
-    /**
-     * Value bytes in the selected format.
-     *
-     * <p>Callers must use {@link #isNull()} before accessing the payload, because SQL NULL has no payload.
-     */
-    public ByteString getBytes() {
+    /** Value bytes in the selected format. <p>Callers must use {@link #isNull()} before accessing the payload, because SQL NULL has no payload. */
+    public ByteString bytes() {
         if (nullValue) {
             throw new IllegalStateException("SQL NULL has no bytes");
         }

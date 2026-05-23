@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Initial SASL response with the selected mechanism.
- */
+/** Initial SASL response with the selected mechanism. */
 public final class SaslInitialResponse implements TaggedMessage, FrontendMessage {
 
     public static final int MESSAGE_TYPE = 'p';
@@ -21,32 +19,24 @@ public final class SaslInitialResponse implements TaggedMessage, FrontendMessage
         this.initialResponse = initialResponse;
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Selected SASL authentication mechanism name.
-     */
-    public String getMechanismName() {
+    /** Selected SASL authentication mechanism name. */
+    public String mechanismName() {
         return mechanismName;
     }
 
-    /**
-     * Whether SASL initial response data is present.
-     */
+    /** Whether SASL initial response data is present. */
     public boolean hasInitialResponse() {
         return initialResponse != null;
     }
 
-    /**
-     * Optional SASL initial response data.
-     */
-    public ByteString getInitialResponse() {
+    /** Optional SASL initial response data. */
+    public ByteString initialResponse() {
         return initialResponse;
     }
 

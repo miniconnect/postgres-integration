@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ImmutableList;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Function-call request addressed by function object ID.
- */
+/** Function-call request addressed by function object ID. */
 public final class FunctionCallMessage implements TaggedMessage, FrontendMessage {
 
     public static final int MESSAGE_TYPE = 'F';
@@ -37,39 +35,29 @@ public final class FunctionCallMessage implements TaggedMessage, FrontendMessage
         this.resultFormatCode = resultFormatCode;
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Object ID of the function to call.
-     */
-    public int getFunctionObjectId() {
+    /** Object ID of the function to call. */
+    public int functionObjectId() {
         return functionObjectId;
     }
 
-    /**
-     * Format codes for function argument values.
-     */
-    public ImmutableList<Integer> getArgumentFormatCodes() {
+    /** Format codes for function argument values. */
+    public ImmutableList<Integer> argumentFormatCodes() {
         return argumentFormatCodes;
     }
 
-    /**
-     * Argument values supplied to the function.
-     */
-    public ImmutableList<NullableValue> getArguments() {
+    /** Argument values supplied to the function. */
+    public ImmutableList<NullableValue> arguments() {
         return arguments;
     }
 
-    /**
-     * Format code requested for the function result.
-     */
-    public int getResultFormatCode() {
+    /** Format code requested for the function result. */
+    public int resultFormatCode() {
         return resultFormatCode;
     }
 

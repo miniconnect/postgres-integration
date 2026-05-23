@@ -4,9 +4,7 @@ import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Asynchronous notification delivered to a listening frontend.
- */
+/** Asynchronous notification delivered to a listening frontend. */
 public final class NotificationResponse implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'A';
@@ -23,32 +21,24 @@ public final class NotificationResponse implements TaggedMessage, BackendMessage
         this.payload = Objects.requireNonNull(payload, "payload");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Process ID of the notifying backend.
-     */
-    public int getProcessId() {
+    /** Process ID of the notifying backend. */
+    public int processId() {
         return processId;
     }
 
-    /**
-     * Name of the notification channel.
-     */
-    public String getChannelName() {
+    /** Name of the notification channel. */
+    public String channelName() {
         return channelName;
     }
 
-    /**
-     * Notification payload string.
-     */
-    public String getPayload() {
+    /** Notification payload string. */
+    public String payload() {
         return payload;
     }
 

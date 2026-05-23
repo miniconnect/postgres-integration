@@ -4,9 +4,7 @@ import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Metadata for one field in a RowDescriptionMessage message.
- */
+/** Metadata for one field in a RowDescriptionMessage message. */
 public final class FieldDescription {
 
     private final String name;
@@ -40,52 +38,38 @@ public final class FieldDescription {
         this.formatCode = formatCode;
     }
 
-    /**
-     * Field name.
-     */
-    public String getName() {
+    /** Field name. */
+    public String name() {
         return name;
     }
 
-    /**
-     * Object ID of the source table, or zero when unavailable.
-     */
-    public int getTableObjectId() {
+    /** Object ID of the source table, or zero when unavailable. */
+    public int tableObjectId() {
         return tableObjectId;
     }
 
-    /**
-     * Attribute number of the source table column, or zero when unavailable.
-     */
-    public int getColumnAttributeNumber() {
+    /** Attribute number of the source table column, or zero when unavailable. */
+    public int columnAttributeNumber() {
         return columnAttributeNumber;
     }
 
-    /**
-     * Object ID of the field data type.
-     */
-    public int getDataTypeObjectId() {
+    /** Object ID of the field data type. */
+    public int dataTypeObjectId() {
         return dataTypeObjectId;
     }
 
-    /**
-     * Data type size, or negative for variable-width types.
-     */
-    public int getDataTypeSize() {
+    /** Data type size, or negative for variable-width types. */
+    public int dataTypeSize() {
         return dataTypeSize;
     }
 
-    /**
-     * Type-specific modifier, or negative when unavailable.
-     */
-    public int getTypeModifier() {
+    /** Type-specific modifier, or negative when unavailable. */
+    public int typeModifier() {
         return typeModifier;
     }
 
-    /**
-     * Format code used for the field.
-     */
-    public int getFormatCode() {
+    /** Format code used for the field. */
+    public int formatCode() {
         return formatCode;
     }
 

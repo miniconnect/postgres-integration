@@ -4,9 +4,7 @@ import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * ExecuteMessage command for a portal.
- */
+/** ExecuteMessage command for a portal. */
 public final class ExecuteMessage implements TaggedMessage, FrontendMessage {
 
     public static final int MESSAGE_TYPE = 'E';
@@ -20,25 +18,19 @@ public final class ExecuteMessage implements TaggedMessage, FrontendMessage {
         this.maximumRowCount = maximumRowCount;
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Portal name to execute, empty for the unnamed portal.
-     */
-    public String getPortalName() {
+    /** Portal name to execute, empty for the unnamed portal. */
+    public String portalName() {
         return portalName;
     }
 
-    /**
-     * Maximum rows to return, or zero for no limit.
-     */
-    public int getMaximumRowCount() {
+    /** Maximum rows to return, or zero for no limit. */
+    public int maximumRowCount() {
         return maximumRowCount;
     }
 

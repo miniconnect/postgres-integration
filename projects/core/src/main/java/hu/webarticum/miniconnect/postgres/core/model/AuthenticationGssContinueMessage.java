@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Authentication request carrying GSSAPI or SSPI data.
- */
+/** Authentication request carrying GSSAPI or SSPI data. */
 public final class AuthenticationGssContinueMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'R';
@@ -20,25 +18,19 @@ public final class AuthenticationGssContinueMessage implements TaggedMessage, Ba
         this.data = Objects.requireNonNull(data, "data");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Authentication request code carried in the message.
-     */
-    public int getAuthenticationCode() {
+    /** Authentication request code carried in the message. */
+    public int authenticationCode() {
         return AUTHENTICATION_CODE;
     }
 
-    /**
-     * GSSAPI or SSPI authentication data bytes.
-     */
-    public ByteString getData() {
+    /** GSSAPI or SSPI authentication data bytes. */
+    public ByteString data() {
         return data;
     }
 

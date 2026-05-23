@@ -4,9 +4,7 @@ import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Function-call result message.
- */
+/** Function-call result message. */
 public final class FunctionCallResponse implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'V';
@@ -17,18 +15,14 @@ public final class FunctionCallResponse implements TaggedMessage, BackendMessage
         this.result = Objects.requireNonNull(result, "result");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Function result value.
-     */
-    public NullableValue getResult() {
+    /** Function result value. */
+    public NullableValue result() {
         return result;
     }
 

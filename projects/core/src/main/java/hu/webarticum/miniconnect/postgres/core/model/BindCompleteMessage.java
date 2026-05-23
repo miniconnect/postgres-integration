@@ -2,18 +2,14 @@ package hu.webarticum.miniconnect.postgres.core.model;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * BindMessage-complete indicator.
- */
+/** BindMessage-complete indicator. */
 public final class BindCompleteMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = '2';
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 

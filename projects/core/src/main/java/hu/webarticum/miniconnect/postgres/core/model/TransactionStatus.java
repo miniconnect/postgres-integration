@@ -1,15 +1,12 @@
 package hu.webarticum.miniconnect.postgres.core.model;
 
-/**
- * ReadyForQueryMessage transaction status code.
- */
+/** ReadyForQueryMessage transaction status code. */
 public enum TransactionStatus {
 
     IDLE('I'),
-
     IN_TRANSACTION('T'),
-
-    FAILED_TRANSACTION('E');
+    FAILED_TRANSACTION('E'),
+    ;
 
     private final int code;
 
@@ -17,10 +14,8 @@ public enum TransactionStatus {
         this.code = code;
     }
 
-    /**
-     * One-byte protocol code for this value.
-     */
-    public int getCode() {
+    /** One-byte protocol code for this value. */
+    public int code() {
         return code;
     }
 

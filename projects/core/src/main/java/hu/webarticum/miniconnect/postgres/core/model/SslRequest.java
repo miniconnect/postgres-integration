@@ -2,9 +2,7 @@ package hu.webarticum.miniconnect.postgres.core.model;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Startup request asking whether SSL encryption is supported.
- */
+/** Startup request asking whether SSL encryption is supported. */
 public final class SslRequest implements InitialMessage, FrontendMessage {
 
     public static final int REQUEST_CODE = 80877103;

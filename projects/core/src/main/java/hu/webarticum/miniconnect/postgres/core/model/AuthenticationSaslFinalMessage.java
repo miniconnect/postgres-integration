@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Authentication request carrying final SASL outcome data.
- */
+/** Authentication request carrying final SASL outcome data. */
 public final class AuthenticationSaslFinalMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'R';
@@ -20,25 +18,19 @@ public final class AuthenticationSaslFinalMessage implements TaggedMessage, Back
         this.data = Objects.requireNonNull(data, "data");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Authentication request code carried in the message.
-     */
-    public int getAuthenticationCode() {
+    /** Authentication request code carried in the message. */
+    public int authenticationCode() {
         return AUTHENTICATION_CODE;
     }
 
-    /**
-     * Final SASL outcome data for the selected mechanism.
-     */
-    public ByteString getData() {
+    /** Final SASL outcome data for the selected mechanism. */
+    public ByteString data() {
         return data;
     }
 

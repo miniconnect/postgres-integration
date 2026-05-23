@@ -2,27 +2,21 @@ package hu.webarticum.miniconnect.postgres.core.model;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Authentication request indicating successful authentication.
- */
+/** Authentication request indicating successful authentication. */
 public final class AuthenticationOkMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'R';
 
     public static final int AUTHENTICATION_CODE = 0;
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Authentication request code carried in the message.
-     */
-    public int getAuthenticationCode() {
+    /** Authentication request code carried in the message. */
+    public int authenticationCode() {
         return AUTHENTICATION_CODE;
     }
 

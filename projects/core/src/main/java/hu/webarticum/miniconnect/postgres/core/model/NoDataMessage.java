@@ -2,18 +2,14 @@ package hu.webarticum.miniconnect.postgres.core.model;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Indicator that no row description data is available.
- */
+/** Indicator that no row description data is available. */
 public final class NoDataMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'n';
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 

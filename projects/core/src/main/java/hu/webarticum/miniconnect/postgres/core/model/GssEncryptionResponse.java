@@ -2,9 +2,7 @@ package hu.webarticum.miniconnect.postgres.core.model;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Single-byte response to a GssEncryptionRequest.
- */
+/** Single-byte response to a GssEncryptionRequest. */
 public final class GssEncryptionResponse implements InitialMessage, BackendMessage {
 
     private final boolean supported;
@@ -13,17 +11,13 @@ public final class GssEncryptionResponse implements InitialMessage, BackendMessa
         this.supported = supported;
     }
 
-    /**
-     * Whether the requested encryption mode is accepted.
-     */
+    /** Whether the requested encryption mode is accepted. */
     public boolean isSupported() {
         return supported;
     }
 
-    /**
-     * Single-byte response code sent on the wire.
-     */
-    public int getResponseCode() {
+    /** Single-byte response code sent on the wire. */
+    public int responseCode() {
         return supported ? 'G' : 'N';
     }
 

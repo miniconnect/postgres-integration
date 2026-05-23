@@ -4,9 +4,7 @@ import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Single startup parameter name/value pair sent by the frontend.
- */
+/** Single startup parameter name/value pair sent by the frontend. */
 public final class StartupParameter {
 
     private final String name;
@@ -18,17 +16,13 @@ public final class StartupParameter {
         this.value = Objects.requireNonNull(value, "value");
     }
 
-    /**
-     * Startup parameter name.
-     */
-    public String getName() {
+    /** Startup parameter name. */
+    public String name() {
         return name;
     }
 
-    /**
-     * Startup parameter value.
-     */
-    public String getValue() {
+    /** Startup parameter value. */
+    public String value() {
         return value;
     }
 

@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Request to cancel work running in a target backend.
- */
+/** Request to cancel work running in a target backend. */
 public final class CancelRequest implements InitialMessage, FrontendMessage {
 
     public static final int REQUEST_CODE = 80877102;
@@ -21,17 +19,13 @@ public final class CancelRequest implements InitialMessage, FrontendMessage {
         this.secretKey = Objects.requireNonNull(secretKey, "secretKey");
     }
 
-    /**
-     * Process ID of the target backend.
-     */
-    public int getProcessId() {
+    /** Process ID of the target backend. */
+    public int processId() {
         return processId;
     }
 
-    /**
-     * Secret key for the target backend.
-     */
-    public ByteString getSecretKey() {
+    /** Secret key for the target backend. */
+    public ByteString secretKey() {
         return secretKey;
     }
 

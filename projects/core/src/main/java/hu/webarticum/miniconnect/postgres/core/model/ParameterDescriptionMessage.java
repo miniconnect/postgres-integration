@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ImmutableList;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Parameter type description for a prepared statement.
- */
+/** Parameter type description for a prepared statement. */
 public final class ParameterDescriptionMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 't';
@@ -21,18 +19,14 @@ public final class ParameterDescriptionMessage implements TaggedMessage, Backend
         }
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Object IDs of statement parameter data types.
-     */
-    public ImmutableList<Integer> getParameterTypeObjectIds() {
+    /** Object IDs of statement parameter data types. */
+    public ImmutableList<Integer> parameterTypeObjectIds() {
         return parameterTypeObjectIds;
     }
 

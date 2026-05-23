@@ -4,9 +4,7 @@ import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Command-completed response with a command tag.
- */
+/** Command-completed response with a command tag. */
 public final class CommandCompleteMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'C';
@@ -17,18 +15,14 @@ public final class CommandCompleteMessage implements TaggedMessage, BackendMessa
         this.commandTag = Objects.requireNonNull(commandTag, "commandTag");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Command tag identifying the completed SQL command.
-     */
-    public String getCommandTag() {
+    /** Command tag identifying the completed SQL command. */
+    public String commandTag() {
         return commandTag;
     }
 

@@ -8,9 +8,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ImmutableList;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Error message made of identified string fields.
- */
+/** Error message made of identified string fields. */
 public final class ErrorResponse implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'E';
@@ -64,29 +62,23 @@ public final class ErrorResponse implements TaggedMessage, BackendMessage {
         this(toFields(fields));
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Identified error fields in protocol form.
-     */
-    public ImmutableList<ResponseField> getFields() {
+    /** Identified error fields in protocol form. */
+    public ImmutableList<ResponseField> fields() {
         return fields;
     }
 
-    /**
-     * Value of a single identified error field.
-     */
-    public String getField(char fieldType) {
+    /** Value of a single identified error field. */
+    public String field(char fieldType) {
         for (int i = fields.size() - 1; i >= 0; i--) {
             ResponseField field = fields.get(i);
-            if (field.getType() == fieldType) {
-                return field.getValue();
+            if (field.type() == fieldType) {
+                return field.value();
             }
         }
         return null;

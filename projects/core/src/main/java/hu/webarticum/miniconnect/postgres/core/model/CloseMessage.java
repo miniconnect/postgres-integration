@@ -4,9 +4,7 @@ import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * CloseMessage command for a prepared statement or portal.
- */
+/** CloseMessage command for a prepared statement or portal. */
 public final class CloseMessage implements TaggedMessage, FrontendMessage {
 
     public static final int MESSAGE_TYPE = 'C';
@@ -20,25 +18,19 @@ public final class CloseMessage implements TaggedMessage, FrontendMessage {
         this.targetName = Objects.requireNonNull(targetName, "targetName");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Whether the close target is a prepared statement or portal.
-     */
-    public NamedObjectType getTargetType() {
+    /** Whether the close target is a prepared statement or portal. */
+    public NamedObjectType targetType() {
         return targetType;
     }
 
-    /**
-     * Name of the prepared statement or portal to close.
-     */
-    public String getTargetName() {
+    /** Name of the prepared statement or portal to close. */
+    public String targetName() {
         return targetName;
     }
 

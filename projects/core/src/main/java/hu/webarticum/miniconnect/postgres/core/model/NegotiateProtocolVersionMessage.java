@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ImmutableList;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Protocol-version negotiation response.
- */
+/** Protocol-version negotiation response. */
 public final class NegotiateProtocolVersionMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'v';
@@ -27,25 +25,19 @@ public final class NegotiateProtocolVersionMessage implements TaggedMessage, Bac
         }
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Newest protocol minor version supported by the backend.
-     */
-    public int getNewestSupportedMinorVersion() {
+    /** Newest protocol minor version supported by the backend. */
+    public int newestSupportedMinorVersion() {
         return newestSupportedMinorVersion;
     }
 
-    /**
-     * Protocol options not recognized by the backend.
-     */
-    public ImmutableList<String> getUnrecognizedProtocolOptions() {
+    /** Protocol options not recognized by the backend. */
+    public ImmutableList<String> unrecognizedProtocolOptions() {
         return unrecognizedProtocolOptions;
     }
 

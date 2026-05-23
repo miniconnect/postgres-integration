@@ -2,9 +2,7 @@ package hu.webarticum.miniconnect.postgres.core.model;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Single-byte response to an SslRequest.
- */
+/** Single-byte response to an SslRequest. */
 public final class SslResponse implements InitialMessage, BackendMessage {
 
     private final boolean supported;
@@ -13,17 +11,13 @@ public final class SslResponse implements InitialMessage, BackendMessage {
         this.supported = supported;
     }
 
-    /**
-     * Whether the requested encryption mode is accepted.
-     */
+    /** Whether the requested encryption mode is accepted. */
     public boolean isSupported() {
         return supported;
     }
 
-    /**
-     * Single-byte response code sent on the wire.
-     */
-    public int getResponseCode() {
+    /** Single-byte response code sent on the wire. */
+    public int responseCode() {
         return supported ? 'S' : 'N';
     }
 

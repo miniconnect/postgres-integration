@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ImmutableList;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * BindMessage command that creates a portal from a prepared statement.
- */
+/** BindMessage command that creates a portal from a prepared statement. */
 public final class BindMessage implements TaggedMessage, FrontendMessage {
 
     public static final int MESSAGE_TYPE = 'B';
@@ -44,46 +42,34 @@ public final class BindMessage implements TaggedMessage, FrontendMessage {
         }
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Destination portal name, empty for the unnamed portal.
-     */
-    public String getDestinationPortalName() {
+    /** Destination portal name, empty for the unnamed portal. */
+    public String destinationPortalName() {
         return destinationPortalName;
     }
 
-    /**
-     * Source prepared statement name, empty for the unnamed statement.
-     */
-    public String getSourcePreparedStatementName() {
+    /** Source prepared statement name, empty for the unnamed statement. */
+    public String sourcePreparedStatementName() {
         return sourcePreparedStatementName;
     }
 
-    /**
-     * Format codes for parameter values.
-     */
-    public ImmutableList<Integer> getParameterFormatCodes() {
+    /** Format codes for parameter values. */
+    public ImmutableList<Integer> parameterFormatCodes() {
         return parameterFormatCodes;
     }
 
-    /**
-     * Parameter values supplied for the prepared statement.
-     */
-    public ImmutableList<NullableValue> getParameterValues() {
+    /** Parameter values supplied for the prepared statement. */
+    public ImmutableList<NullableValue> parameterValues() {
         return parameterValues;
     }
 
-    /**
-     * Format codes requested for result columns.
-     */
-    public ImmutableList<Integer> getResultFormatCodes() {
+    /** Format codes requested for result columns. */
+    public ImmutableList<Integer> resultFormatCodes() {
         return resultFormatCodes;
     }
 

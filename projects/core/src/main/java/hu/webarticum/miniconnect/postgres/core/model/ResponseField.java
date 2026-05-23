@@ -4,9 +4,7 @@ import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Single field in an error or notice response.
- */
+/** Single field in an error or notice response. */
 public final class ResponseField {
 
     private final char type;
@@ -18,17 +16,13 @@ public final class ResponseField {
         this.value = Objects.requireNonNull(value, "value");
     }
 
-    /**
-     * Field type code as defined by the PostgreSQL protocol.
-     */
-    public char getType() {
+    /** Field type code as defined by the PostgreSQL protocol. */
+    public char type() {
         return type;
     }
 
-    /**
-     * Field value.
-     */
-    public String getValue() {
+    /** Field value. */
+    public String value() {
         return value;
     }
 

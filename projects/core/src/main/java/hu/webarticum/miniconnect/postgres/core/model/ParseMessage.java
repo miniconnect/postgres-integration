@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ImmutableList;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * ParseMessage command creating a prepared statement from a query string.
- */
+/** ParseMessage command creating a prepared statement from a query string. */
 public final class ParseMessage implements TaggedMessage, FrontendMessage {
 
     public static final int MESSAGE_TYPE = 'P';
@@ -27,32 +25,24 @@ public final class ParseMessage implements TaggedMessage, FrontendMessage {
         }
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Prepared statement name, empty for the unnamed statement.
-     */
-    public String getPreparedStatementName() {
+    /** Prepared statement name, empty for the unnamed statement. */
+    public String preparedStatementName() {
         return preparedStatementName;
     }
 
-    /**
-     * QueryMessage string to parse.
-     */
-    public String getQuery() {
+    /** QueryMessage string to parse. */
+    public String query() {
         return query;
     }
 
-    /**
-     * Object IDs of explicitly specified parameter types.
-     */
-    public ImmutableList<Integer> getParameterTypeObjectIds() {
+    /** Object IDs of explicitly specified parameter types. */
+    public ImmutableList<Integer> parameterTypeObjectIds() {
         return parameterTypeObjectIds;
     }
 

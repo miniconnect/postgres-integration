@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ImmutableList;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Data row containing column values.
- */
+/** Data row containing column values. */
 public final class DataRowMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'D';
@@ -21,18 +19,14 @@ public final class DataRowMessage implements TaggedMessage, BackendMessage {
         }
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Column values in this row.
-     */
-    public ImmutableList<NullableValue> getColumnValues() {
+    /** Column values in this row. */
+    public ImmutableList<NullableValue> columnValues() {
         return columnValues;
     }
 

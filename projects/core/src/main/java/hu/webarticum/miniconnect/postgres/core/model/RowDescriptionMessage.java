@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ImmutableList;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Description of fields returned by rows.
- */
+/** Description of fields returned by rows. */
 public final class RowDescriptionMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'T';
@@ -21,18 +19,14 @@ public final class RowDescriptionMessage implements TaggedMessage, BackendMessag
         }
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Descriptions of the fields in returned rows.
-     */
-    public ImmutableList<FieldDescription> getFields() {
+    /** Descriptions of the fields in returned rows. */
+    public ImmutableList<FieldDescription> fields() {
         return fields;
     }
 

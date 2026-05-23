@@ -4,9 +4,7 @@ import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Runtime parameter status reported by the backend.
- */
+/** Runtime parameter status reported by the backend. */
 public final class ParameterStatusMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'S';
@@ -20,25 +18,19 @@ public final class ParameterStatusMessage implements TaggedMessage, BackendMessa
         this.value = Objects.requireNonNull(value, "value");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Runtime parameter name.
-     */
-    public String getName() {
+    /** Runtime parameter name. */
+    public String name() {
         return name;
     }
 
-    /**
-     * Runtime parameter value.
-     */
-    public String getValue() {
+    /** Runtime parameter value. */
+    public String value() {
         return value;
     }
 

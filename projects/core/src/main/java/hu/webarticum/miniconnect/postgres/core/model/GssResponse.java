@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Frontend GSSAPI or SSPI authentication data.
- */
+/** Frontend GSSAPI or SSPI authentication data. */
 public final class GssResponse implements TaggedMessage, FrontendMessage {
 
     public static final int MESSAGE_TYPE = 'p';
@@ -18,18 +16,14 @@ public final class GssResponse implements TaggedMessage, FrontendMessage {
         this.data = Objects.requireNonNull(data, "data");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * GSSAPI or SSPI authentication data bytes.
-     */
-    public ByteString getData() {
+    /** GSSAPI or SSPI authentication data bytes. */
+    public ByteString data() {
         return data;
     }
 

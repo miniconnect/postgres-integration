@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ImmutableList;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Start Copy Both response used for streaming replication.
- */
+/** Start Copy Both response used for streaming replication. */
 public final class CopyBothResponse implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'W';
@@ -24,25 +22,19 @@ public final class CopyBothResponse implements TaggedMessage, BackendMessage {
         }
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Overall COPY format code.
-     */
-    public int getOverallFormatCode() {
+    /** Overall COPY format code. */
+    public int overallFormatCode() {
         return overallFormatCode;
     }
 
-    /**
-     * Format codes for each copied column.
-     */
-    public ImmutableList<Integer> getColumnFormatCodes() {
+    /** Format codes for each copied column. */
+    public ImmutableList<Integer> columnFormatCodes() {
         return columnFormatCodes;
     }
 

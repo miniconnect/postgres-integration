@@ -4,9 +4,7 @@ import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Frontend COPY-failure indicator with an error message.
- */
+/** Frontend COPY-failure indicator with an error message. */
 public final class CopyFailMessage implements TaggedMessage, FrontendMessage {
 
     public static final int MESSAGE_TYPE = 'f';
@@ -17,18 +15,14 @@ public final class CopyFailMessage implements TaggedMessage, FrontendMessage {
         this.message = Objects.requireNonNull(message, "message");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Error message explaining the COPY failure.
-     */
-    public String getMessage() {
+    /** Error message explaining the COPY failure. */
+    public String message() {
         return message;
     }
 

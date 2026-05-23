@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * SASL response data for an authentication exchange.
- */
+/** SASL response data for an authentication exchange. */
 public final class SaslResponse implements TaggedMessage, FrontendMessage {
 
     public static final int MESSAGE_TYPE = 'p';
@@ -18,18 +16,14 @@ public final class SaslResponse implements TaggedMessage, FrontendMessage {
         this.data = Objects.requireNonNull(data, "data");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * SASL response data bytes.
-     */
-    public ByteString getData() {
+    /** SASL response data bytes. */
+    public ByteString data() {
         return data;
     }
 

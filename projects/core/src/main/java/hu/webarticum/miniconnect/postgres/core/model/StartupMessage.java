@@ -8,9 +8,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ImmutableList;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * Startup packet carrying protocol version and connection parameters.
- */
+/** Startup packet carrying protocol version and connection parameters. */
 public final class StartupMessage implements InitialMessage, FrontendMessage {
 
     public static final int PROTOCOL_VERSION_3_0 = 196608;
@@ -35,43 +33,33 @@ public final class StartupMessage implements InitialMessage, FrontendMessage {
         this(protocolVersion, toParameters(parameters));
     }
 
-    /**
-     * Protocol version number requested by the frontend.
-     */
-    public int getProtocolVersion() {
+    /** Protocol version number requested by the frontend. */
+    public int protocolVersion() {
         return protocolVersion;
     }
 
-    /**
-     * Major part of the requested protocol version.
-     */
-    public int getProtocolMajorVersion() {
+    /** Major part of the requested protocol version. */
+    public int protocolMajorVersion() {
         return (protocolVersion >>> 16) & 0xFFFF;
     }
 
-    /**
-     * Minor part of the requested protocol version.
-     */
-    public int getProtocolMinorVersion() {
+    /** Minor part of the requested protocol version. */
+    public int protocolMinorVersion() {
         return protocolVersion & 0xFFFF;
     }
 
-    /**
-     * Startup parameter name-value pairs.
-     */
-    public ImmutableList<StartupParameter> getParameters() {
+    /** Startup parameter name-value pairs. */
+    public ImmutableList<StartupParameter> parameters() {
         return parameters;
     }
 
-    /**
-     * Value of a single startup parameter.
-     */
-    public String getParameter(String name) {
+    /** Value of a single startup parameter. */
+    public String parameter(String name) {
         Objects.requireNonNull(name, "name");
         for (int i = parameters.size() - 1; i >= 0; i--) {
             StartupParameter parameter = parameters.get(i);
-            if (parameter.getName().equals(name)) {
-                return parameter.getValue();
+            if (parameter.name().equals(name)) {
+                return parameter.value();
             }
         }
         return null;

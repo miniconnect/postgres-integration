@@ -4,9 +4,7 @@ import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * DescribeMessage command for a prepared statement or portal.
- */
+/** DescribeMessage command for a prepared statement or portal. */
 public final class DescribeMessage implements TaggedMessage, FrontendMessage {
 
     public static final int MESSAGE_TYPE = 'D';
@@ -20,25 +18,19 @@ public final class DescribeMessage implements TaggedMessage, FrontendMessage {
         this.targetName = Objects.requireNonNull(targetName, "targetName");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * Whether the described target is a prepared statement or portal.
-     */
-    public NamedObjectType getTargetType() {
+    /** Whether the described target is a prepared statement or portal. */
+    public NamedObjectType targetType() {
         return targetType;
     }
 
-    /**
-     * Name of the prepared statement or portal to describe.
-     */
-    public String getTargetName() {
+    /** Name of the prepared statement or portal to describe. */
+    public String targetName() {
         return targetName;
     }
 

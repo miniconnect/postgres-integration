@@ -5,9 +5,7 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/**
- * COPY data chunk in a COPY data stream.
- */
+/** COPY data chunk in a COPY data stream. */
 public final class CopyDataMessage implements TaggedMessage, FrontendMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'd';
@@ -18,18 +16,14 @@ public final class CopyDataMessage implements TaggedMessage, FrontendMessage, Ba
         this.data = Objects.requireNonNull(data, "data");
     }
 
-    /**
-     * One-byte message type code used on the wire.
-     */
+    /** One-byte message type code used on the wire. */
     @Override
-    public int getMessageType() {
+    public int messageType() {
         return MESSAGE_TYPE;
     }
 
-    /**
-     * COPY stream data bytes.
-     */
-    public ByteString getData() {
+    /** COPY stream data bytes. */
+    public ByteString data() {
         return data;
     }
 
