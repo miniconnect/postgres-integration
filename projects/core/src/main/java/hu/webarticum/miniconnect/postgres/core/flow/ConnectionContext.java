@@ -1,0 +1,34 @@
+package hu.webarticum.miniconnect.postgres.core.flow;
+
+import hu.webarticum.miniconnect.lang.ByteString;
+import hu.webarticum.miniconnect.lang.ImmutableList;
+import hu.webarticum.miniconnect.postgres.core.model.ProtocolPhase;
+import hu.webarticum.miniconnect.postgres.core.model.ProtocolVersion;
+import hu.webarticum.miniconnect.postgres.core.model.StartupParameter;
+import hu.webarticum.miniconnect.postgres.core.model.TransactionStatus;
+
+public interface ConnectionContext {
+
+    public ProtocolVersion protocolVersion();
+
+    public ImmutableList<StartupParameter> startupParameters();
+
+    public String startupParameter(String name);
+
+    public ProtocolPhase protocolPhase();
+
+    public TransactionStatus transactionStatus();
+
+    public boolean sslEnabled();
+
+    public boolean gssEncryptionEnabled();
+
+    public int backendProcessId();
+
+    public ByteString cancellationSecretKey();
+
+    public <T> T attribute(ConnectionAttributeKey<T> key);
+
+    public <T> void attribute(ConnectionAttributeKey<T> key, T value);
+
+}
