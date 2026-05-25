@@ -14,9 +14,7 @@ public final class ParameterDescriptionMessage implements TaggedMessage, Backend
 
     public ParameterDescriptionMessage(ImmutableList<Integer> parameterTypeObjectIds) {
         this.parameterTypeObjectIds = Objects.requireNonNull(parameterTypeObjectIds, "parameterTypeObjectIds");
-        for (Integer parameterTypeObjectId : parameterTypeObjectIds) {
-            Objects.requireNonNull(parameterTypeObjectId, "parameterTypeObjectId");
-        }
+        parameterTypeObjectIds.forEach(v -> Objects.requireNonNull(v, "parameterTypeObjectId"));
     }
 
     /** One-byte message type code used on the wire. */
@@ -39,12 +37,10 @@ public final class ParameterDescriptionMessage implements TaggedMessage, Backend
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof ParameterDescriptionMessage)) {
+        } else if (!(other instanceof ParameterDescriptionMessage)) {
             return false;
         }
-        ParameterDescriptionMessage otherParameterDescription =
-                (ParameterDescriptionMessage) other;
+        ParameterDescriptionMessage otherParameterDescription = (ParameterDescriptionMessage) other;
         return parameterTypeObjectIds.equals(otherParameterDescription.parameterTypeObjectIds);
     }
 

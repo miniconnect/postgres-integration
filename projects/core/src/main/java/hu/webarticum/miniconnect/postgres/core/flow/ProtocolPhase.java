@@ -1,4 +1,4 @@
-package hu.webarticum.miniconnect.postgres.core.model;
+package hu.webarticum.miniconnect.postgres.core.flow;
 
 /** Framework-level phase of a PostgreSQL protocol connection. */
 public enum ProtocolPhase {

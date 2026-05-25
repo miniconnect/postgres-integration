@@ -31,8 +31,7 @@ public final class ConnectionAttributeKey<T> {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof ConnectionAttributeKey)) {
+        } else if (!(other instanceof ConnectionAttributeKey)) {
             return false;
         }
         ConnectionAttributeKey<?> otherConnectionAttributeKey = (ConnectionAttributeKey<?>) other;

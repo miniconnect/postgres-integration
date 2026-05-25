@@ -89,18 +89,18 @@ public final class FieldDescription {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof FieldDescription)) {
+        } else if (!(other instanceof FieldDescription)) {
             return false;
         }
         FieldDescription otherFieldDescription = (FieldDescription) other;
-        return tableObjectId == otherFieldDescription.tableObjectId
-                && columnAttributeNumber == otherFieldDescription.columnAttributeNumber
-                && dataTypeObjectId == otherFieldDescription.dataTypeObjectId
-                && dataTypeSize == otherFieldDescription.dataTypeSize
-                && typeModifier == otherFieldDescription.typeModifier
-                && formatCode == otherFieldDescription.formatCode
-                && name.equals(otherFieldDescription.name);
+        return
+                tableObjectId == otherFieldDescription.tableObjectId &&
+                columnAttributeNumber == otherFieldDescription.columnAttributeNumber &&
+                dataTypeObjectId == otherFieldDescription.dataTypeObjectId &&
+                dataTypeSize == otherFieldDescription.dataTypeSize &&
+                typeModifier == otherFieldDescription.typeModifier &&
+                formatCode == otherFieldDescription.formatCode &&
+                name.equals(otherFieldDescription.name);
     }
 
     @Override

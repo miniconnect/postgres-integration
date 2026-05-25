@@ -35,8 +35,7 @@ public final class CopyFailMessage implements TaggedMessage, FrontendMessage {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof CopyFailMessage)) {
+        } else if (!(other instanceof CopyFailMessage)) {
             return false;
         }
         CopyFailMessage otherCopyFail = (CopyFailMessage) other;

@@ -29,15 +29,14 @@ public final class GssResponse implements TaggedMessage, FrontendMessage {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(data);
+        return data.hashCode();
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof GssResponse)) {
+        } else if (!(other instanceof GssResponse)) {
             return false;
         }
         GssResponse otherGSSResponse = (GssResponse) other;

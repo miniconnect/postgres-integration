@@ -35,8 +35,7 @@ public final class DescribePortalMessage implements TaggedMessage, FrontendMessa
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof DescribePortalMessage)) {
+        } else if (!(other instanceof DescribePortalMessage)) {
             return false;
         }
         DescribePortalMessage otherDescribePortal = (DescribePortalMessage) other;

@@ -14,9 +14,7 @@ public final class RowDescriptionMessage implements TaggedMessage, BackendMessag
 
     public RowDescriptionMessage(ImmutableList<FieldDescription> fields) {
         this.fields = Objects.requireNonNull(fields, "fields");
-        for (FieldDescription field : fields) {
-            Objects.requireNonNull(field, "field");
-        }
+        fields.forEach(v -> Objects.requireNonNull(v, "field"));
     }
 
     /** One-byte message type code used on the wire. */
@@ -39,8 +37,7 @@ public final class RowDescriptionMessage implements TaggedMessage, BackendMessag
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof RowDescriptionMessage)) {
+        } else if (!(other instanceof RowDescriptionMessage)) {
             return false;
         }
         RowDescriptionMessage otherRowDescription = (RowDescriptionMessage) other;

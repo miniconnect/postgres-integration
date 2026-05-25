@@ -35,13 +35,13 @@ public final class StartupParameter {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof StartupParameter)) {
+        } else if (!(other instanceof StartupParameter)) {
             return false;
         }
         StartupParameter otherStartupParameter = (StartupParameter) other;
-        return name.equals(otherStartupParameter.name)
-                && value.equals(otherStartupParameter.value);
+        return
+                name.equals(otherStartupParameter.name) &&
+                value.equals(otherStartupParameter.value);
     }
 
     @Override

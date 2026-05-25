@@ -43,13 +43,13 @@ public final class ExecuteMessage implements TaggedMessage, FrontendMessage {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof ExecuteMessage)) {
+        } else if (!(other instanceof ExecuteMessage)) {
             return false;
         }
         ExecuteMessage otherExecute = (ExecuteMessage) other;
-        return maximumRowCount == otherExecute.maximumRowCount
-                && portalName.equals(otherExecute.portalName);
+        return
+                maximumRowCount == otherExecute.maximumRowCount &&
+                portalName.equals(otherExecute.portalName);
     }
 
     @Override

@@ -6,9 +6,7 @@ import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
 /** Authentication request carrying GSSAPI or SSPI data. */
-public final class AuthenticationGssContinueMessage implements TaggedMessage, BackendMessage {
-
-    public static final int MESSAGE_TYPE = 'R';
+public final class AuthenticationGssContinueMessage implements AuthenticationMessage {
 
     public static final int AUTHENTICATION_CODE = 8;
 
@@ -18,13 +16,8 @@ public final class AuthenticationGssContinueMessage implements TaggedMessage, Ba
         this.data = Objects.requireNonNull(data, "data");
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Authentication request code carried in the message. */
+    @Override
     public int authenticationCode() {
         return AUTHENTICATION_CODE;
     }
@@ -36,19 +29,17 @@ public final class AuthenticationGssContinueMessage implements TaggedMessage, Ba
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(data);
+        return data.hashCode();
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof AuthenticationGssContinueMessage)) {
+        } else if (!(other instanceof AuthenticationGssContinueMessage)) {
             return false;
         }
-        AuthenticationGssContinueMessage otherAuthenticationGssContinue =
-                (AuthenticationGssContinueMessage) other;
+        AuthenticationGssContinueMessage otherAuthenticationGssContinue = (AuthenticationGssContinueMessage) other;
         return Objects.equals(data, otherAuthenticationGssContinue.data);
     }
 

@@ -17,9 +17,7 @@ public final class CopyBothResponse implements TaggedMessage, BackendMessage {
     public CopyBothResponse(FormatCode overallFormatCode, ImmutableList<FormatCode> columnFormatCodes) {
         this.overallFormatCode = Objects.requireNonNull(overallFormatCode, "overallFormatCode");
         this.columnFormatCodes = Objects.requireNonNull(columnFormatCodes, "columnFormatCodes");
-        for (FormatCode columnFormatCode : columnFormatCodes) {
-            Objects.requireNonNull(columnFormatCode, "columnFormatCode");
-        }
+        columnFormatCodes.forEach(v -> Objects.requireNonNull(v, "columnFormatCode"));
     }
 
     /** One-byte message type code used on the wire. */
@@ -47,13 +45,13 @@ public final class CopyBothResponse implements TaggedMessage, BackendMessage {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof CopyBothResponse)) {
+        } else if (!(other instanceof CopyBothResponse)) {
             return false;
         }
         CopyBothResponse otherCopyBothResponse = (CopyBothResponse) other;
-        return overallFormatCode == otherCopyBothResponse.overallFormatCode
-                && columnFormatCodes.equals(otherCopyBothResponse.columnFormatCodes);
+        return
+                overallFormatCode == otherCopyBothResponse.overallFormatCode &&
+                columnFormatCodes.equals(otherCopyBothResponse.columnFormatCodes);
     }
 
     @Override

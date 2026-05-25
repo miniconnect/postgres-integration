@@ -6,9 +6,7 @@ import hu.webarticum.miniconnect.lang.ImmutableList;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
 /** Authentication request listing supported SASL mechanisms. */
-public final class AuthenticationSaslMessage implements TaggedMessage, BackendMessage {
-
-    public static final int MESSAGE_TYPE = 'R';
+public final class AuthenticationSaslMessage implements AuthenticationMessage {
 
     public static final int AUTHENTICATION_CODE = 10;
 
@@ -16,18 +14,11 @@ public final class AuthenticationSaslMessage implements TaggedMessage, BackendMe
 
     public AuthenticationSaslMessage(ImmutableList<String> mechanismNames) {
         this.mechanismNames = Objects.requireNonNull(mechanismNames, "mechanismNames");
-        for (String mechanismName : mechanismNames) {
-            Objects.requireNonNull(mechanismName, "mechanismName");
-        }
-    }
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
+        mechanismNames.forEach(v -> Objects.requireNonNull(v, "mechanismName"));
     }
 
     /** Authentication request code carried in the message. */
+    @Override
     public int authenticationCode() {
         return AUTHENTICATION_CODE;
     }
@@ -46,8 +37,7 @@ public final class AuthenticationSaslMessage implements TaggedMessage, BackendMe
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof AuthenticationSaslMessage)) {
+        } else if (!(other instanceof AuthenticationSaslMessage)) {
             return false;
         }
         AuthenticationSaslMessage otherAuthenticationSasl = (AuthenticationSaslMessage) other;

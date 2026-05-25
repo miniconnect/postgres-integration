@@ -35,8 +35,7 @@ public final class PasswordMessage implements TaggedMessage, FrontendMessage {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof PasswordMessage)) {
+        } else if (!(other instanceof PasswordMessage)) {
             return false;
         }
         PasswordMessage otherPasswordMessage = (PasswordMessage) other;

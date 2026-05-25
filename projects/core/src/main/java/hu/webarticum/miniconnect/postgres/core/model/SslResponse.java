@@ -16,22 +16,16 @@ public final class SslResponse implements InitialMessage, BackendMessage {
         return supported;
     }
 
-    /** Single-byte response code sent on the wire. */
-    public int responseCode() {
-        return supported ? 'S' : 'N';
-    }
-
     @Override
     public int hashCode() {
-        return supported ? 1 : 0;
+        return Boolean.hashCode(supported);
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof SslResponse)) {
+        } else if (!(other instanceof SslResponse)) {
             return false;
         }
         SslResponse otherSslResponse = (SslResponse) other;

@@ -35,8 +35,7 @@ public final class FunctionCallResponse implements TaggedMessage, BackendMessage
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof FunctionCallResponse)) {
+        } else if (!(other instanceof FunctionCallResponse)) {
             return false;
         }
         FunctionCallResponse otherFunctionCallResponse = (FunctionCallResponse) other;

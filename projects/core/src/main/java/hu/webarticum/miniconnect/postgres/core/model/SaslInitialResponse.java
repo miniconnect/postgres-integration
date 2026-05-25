@@ -12,11 +12,26 @@ public final class SaslInitialResponse implements TaggedMessage, FrontendMessage
 
     private final String mechanismName;
 
-    private final ByteString initialResponse;
+    private final boolean hasPayload;
 
-    public SaslInitialResponse(String mechanismName, ByteString initialResponse) {
+    private final ByteString payload;
+
+    private SaslInitialResponse(String mechanismName, boolean hasPayload, ByteString payload) {
         this.mechanismName = Objects.requireNonNull(mechanismName, "mechanismName");
-        this.initialResponse = initialResponse;
+        this.hasPayload = hasPayload;
+        this.payload = Objects.requireNonNull(payload, "payload");
+    }
+
+    public static SaslInitialResponse withoutPayload(String mechanismName) {
+        return new SaslInitialResponse(mechanismName, false, ByteString.empty());
+    }
+
+    public static SaslInitialResponse of(String mechanismName, ByteString payload) {
+        return new SaslInitialResponse(mechanismName, true, payload);
+    }
+
+    public static SaslInitialResponse ofNullable(String mechanismName, ByteString payload) {
+        return payload == null ? withoutPayload(mechanismName) : of(mechanismName, payload);
     }
 
     /** One-byte message type code used on the wire. */
@@ -30,39 +45,44 @@ public final class SaslInitialResponse implements TaggedMessage, FrontendMessage
         return mechanismName;
     }
 
-    /** Whether SASL initial response data is present. */
-    public boolean hasInitialResponse() {
-        return initialResponse != null;
+    /** Whether SASL payload data is present. */
+    public boolean hasPayload() {
+        return hasPayload;
     }
 
-    /** Optional SASL initial response data. */
-    public ByteString initialResponse() {
-        return initialResponse;
+    /** SASL payload data. */
+    public ByteString payload() {
+        if (!hasPayload) {
+            throw new IllegalStateException("No SASL payload is present");
+        }
+        return payload;
     }
 
     @Override
     public int hashCode() {
-        return 31 * mechanismName.hashCode() + Objects.hashCode(initialResponse);
+        return Objects.hash(mechanismName, Boolean.valueOf(hasPayload), payload);
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof SaslInitialResponse)) {
+        } else if (!(other instanceof SaslInitialResponse)) {
             return false;
         }
         SaslInitialResponse otherSaslInitialResponse = (SaslInitialResponse) other;
-        return mechanismName.equals(otherSaslInitialResponse.mechanismName)
-                && Objects.equals(initialResponse, otherSaslInitialResponse.initialResponse);
+        return
+                mechanismName.equals(otherSaslInitialResponse.mechanismName) &&
+                hasPayload == otherSaslInitialResponse.hasPayload &&
+                payload.equals(otherSaslInitialResponse.payload);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("mechanismName", mechanismName)
-                .add("initialResponse", initialResponse)
+                .add("hasPayload", hasPayload)
+                .add("payload", payload)
                 .build();
     }
 

@@ -29,15 +29,14 @@ public final class SaslResponse implements TaggedMessage, FrontendMessage {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(data);
+        return data.hashCode();
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof SaslResponse)) {
+        } else if (!(other instanceof SaslResponse)) {
             return false;
         }
         SaslResponse otherSaslResponse = (SaslResponse) other;

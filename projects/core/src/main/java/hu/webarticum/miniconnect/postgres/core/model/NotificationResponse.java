@@ -51,14 +51,14 @@ public final class NotificationResponse implements TaggedMessage, BackendMessage
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof NotificationResponse)) {
+        } else if (!(other instanceof NotificationResponse)) {
             return false;
         }
         NotificationResponse otherNotificationResponse = (NotificationResponse) other;
-        return processId == otherNotificationResponse.processId
-                && channelName.equals(otherNotificationResponse.channelName)
-                && payload.equals(otherNotificationResponse.payload);
+        return
+                processId == otherNotificationResponse.processId &&
+                channelName.equals(otherNotificationResponse.channelName) &&
+                payload.equals(otherNotificationResponse.payload);
     }
 
     @Override

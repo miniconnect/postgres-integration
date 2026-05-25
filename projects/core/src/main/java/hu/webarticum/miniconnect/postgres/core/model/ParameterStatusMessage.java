@@ -43,13 +43,13 @@ public final class ParameterStatusMessage implements TaggedMessage, BackendMessa
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof ParameterStatusMessage)) {
+        } else if (!(other instanceof ParameterStatusMessage)) {
             return false;
         }
         ParameterStatusMessage otherParameterStatus = (ParameterStatusMessage) other;
-        return name.equals(otherParameterStatus.name)
-                && value.equals(otherParameterStatus.value);
+        return
+                name.equals(otherParameterStatus.name) &&
+                value.equals(otherParameterStatus.value);
     }
 
     @Override

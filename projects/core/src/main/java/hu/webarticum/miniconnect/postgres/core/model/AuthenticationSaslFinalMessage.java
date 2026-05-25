@@ -6,9 +6,7 @@ import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
 /** Authentication request carrying final SASL outcome data. */
-public final class AuthenticationSaslFinalMessage implements TaggedMessage, BackendMessage {
-
-    public static final int MESSAGE_TYPE = 'R';
+public final class AuthenticationSaslFinalMessage implements AuthenticationMessage {
 
     public static final int AUTHENTICATION_CODE = 12;
 
@@ -18,13 +16,8 @@ public final class AuthenticationSaslFinalMessage implements TaggedMessage, Back
         this.data = Objects.requireNonNull(data, "data");
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Authentication request code carried in the message. */
+    @Override
     public int authenticationCode() {
         return AUTHENTICATION_CODE;
     }
@@ -36,19 +29,17 @@ public final class AuthenticationSaslFinalMessage implements TaggedMessage, Back
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(data);
+        return data.hashCode();
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof AuthenticationSaslFinalMessage)) {
+        } else if (!(other instanceof AuthenticationSaslFinalMessage)) {
             return false;
         }
-        AuthenticationSaslFinalMessage otherAuthenticationSaslFinal =
-                (AuthenticationSaslFinalMessage) other;
+        AuthenticationSaslFinalMessage otherAuthenticationSaslFinal = (AuthenticationSaslFinalMessage) other;
         return Objects.equals(data, otherAuthenticationSaslFinal.data);
     }
 

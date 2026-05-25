@@ -31,20 +31,20 @@ public final class CancelRequest implements InitialMessage, FrontendMessage {
 
     @Override
     public int hashCode() {
-        return 31 * processId + Objects.hashCode(secretKey);
+        return Objects.hash(processId, secretKey);
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof CancelRequest)) {
+        } else if (!(other instanceof CancelRequest)) {
             return false;
         }
         CancelRequest otherCancelRequest = (CancelRequest) other;
-        return processId == otherCancelRequest.processId
-                && Objects.equals(secretKey, otherCancelRequest.secretKey);
+        return
+                processId == otherCancelRequest.processId &&
+                Objects.equals(secretKey, otherCancelRequest.secretKey);
     }
 
     @Override

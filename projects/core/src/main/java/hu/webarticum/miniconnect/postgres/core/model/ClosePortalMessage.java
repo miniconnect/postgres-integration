@@ -35,8 +35,7 @@ public final class ClosePortalMessage implements TaggedMessage, FrontendMessage 
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof ClosePortalMessage)) {
+        } else if (!(other instanceof ClosePortalMessage)) {
             return false;
         }
         ClosePortalMessage otherClosePortal = (ClosePortalMessage) other;

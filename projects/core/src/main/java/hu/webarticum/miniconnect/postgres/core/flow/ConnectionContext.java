@@ -2,7 +2,6 @@ package hu.webarticum.miniconnect.postgres.core.flow;
 
 import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ImmutableList;
-import hu.webarticum.miniconnect.postgres.core.model.ProtocolPhase;
 import hu.webarticum.miniconnect.postgres.core.model.ProtocolVersion;
 import hu.webarticum.miniconnect.postgres.core.model.StartupParameter;
 import hu.webarticum.miniconnect.postgres.core.model.TransactionStatus;

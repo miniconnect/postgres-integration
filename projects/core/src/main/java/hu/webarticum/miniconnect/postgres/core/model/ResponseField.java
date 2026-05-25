@@ -39,13 +39,13 @@ public final class ResponseField {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof ResponseField)) {
+        } else if (!(other instanceof ResponseField)) {
             return false;
         }
         ResponseField otherResponseField = (ResponseField) other;
-        return type == otherResponseField.type
-                && value.equals(otherResponseField.value);
+        return
+                type == otherResponseField.type &&
+                value.equals(otherResponseField.value);
     }
 
     @Override

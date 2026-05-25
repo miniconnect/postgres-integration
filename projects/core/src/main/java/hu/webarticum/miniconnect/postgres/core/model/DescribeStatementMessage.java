@@ -35,8 +35,7 @@ public final class DescribeStatementMessage implements TaggedMessage, FrontendMe
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof DescribeStatementMessage)) {
+        } else if (!(other instanceof DescribeStatementMessage)) {
             return false;
         }
         DescribeStatementMessage otherDescribeStatement = (DescribeStatementMessage) other;

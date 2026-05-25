@@ -14,9 +14,7 @@ public final class DataRowMessage implements TaggedMessage, BackendMessage {
 
     public DataRowMessage(ImmutableList<NullableValue> columnValues) {
         this.columnValues = Objects.requireNonNull(columnValues, "columnValues");
-        for (NullableValue columnValue : columnValues) {
-            Objects.requireNonNull(columnValue, "columnValue");
-        }
+        columnValues.forEach(v -> Objects.requireNonNull(v, "columnValue"));
     }
 
     /** One-byte message type code used on the wire. */
@@ -39,8 +37,7 @@ public final class DataRowMessage implements TaggedMessage, BackendMessage {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof DataRowMessage)) {
+        } else if (!(other instanceof DataRowMessage)) {
             return false;
         }
         DataRowMessage otherDataRow = (DataRowMessage) other;

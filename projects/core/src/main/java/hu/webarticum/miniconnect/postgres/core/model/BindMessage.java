@@ -29,17 +29,11 @@ public final class BindMessage implements TaggedMessage, FrontendMessage {
         this.destinationPortalName = Objects.requireNonNull(destinationPortalName, "destinationPortalName");
         this.sourcePreparedStatementName = Objects.requireNonNull(sourcePreparedStatementName, "sourcePreparedStatementName");
         this.parameterFormatCodes = Objects.requireNonNull(parameterFormatCodes, "parameterFormatCodes");
-        for (FormatCode parameterFormatCode : parameterFormatCodes) {
-            Objects.requireNonNull(parameterFormatCode, "parameterFormatCode");
-        }
+        parameterFormatCodes.forEach(v -> Objects.requireNonNull(v, "parameterFormatCode"));
         this.parameterValues = Objects.requireNonNull(parameterValues, "parameterValues");
-        for (NullableValue parameterValue : parameterValues) {
-            Objects.requireNonNull(parameterValue, "parameterValue");
-        }
+        parameterValues.forEach(v -> Objects.requireNonNull(v, "parameterValue"));
         this.resultFormatCodes = Objects.requireNonNull(resultFormatCodes, "resultFormatCodes");
-        for (FormatCode resultFormatCode : resultFormatCodes) {
-            Objects.requireNonNull(resultFormatCode, "resultFormatCode");
-        }
+        resultFormatCodes.forEach(v -> Objects.requireNonNull(v, "resultFormatCode"));
     }
 
     /** One-byte message type code used on the wire. */
@@ -87,16 +81,16 @@ public final class BindMessage implements TaggedMessage, FrontendMessage {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof BindMessage)) {
+        } else if (!(other instanceof BindMessage)) {
             return false;
         }
         BindMessage otherBind = (BindMessage) other;
-        return destinationPortalName.equals(otherBind.destinationPortalName)
-                && sourcePreparedStatementName.equals(otherBind.sourcePreparedStatementName)
-                && parameterFormatCodes.equals(otherBind.parameterFormatCodes)
-                && parameterValues.equals(otherBind.parameterValues)
-                && resultFormatCodes.equals(otherBind.resultFormatCodes);
+        return
+                destinationPortalName.equals(otherBind.destinationPortalName) &&
+                sourcePreparedStatementName.equals(otherBind.sourcePreparedStatementName) &&
+                parameterFormatCodes.equals(otherBind.parameterFormatCodes) &&
+                parameterValues.equals(otherBind.parameterValues) &&
+                resultFormatCodes.equals(otherBind.resultFormatCodes);
     }
 
     @Override

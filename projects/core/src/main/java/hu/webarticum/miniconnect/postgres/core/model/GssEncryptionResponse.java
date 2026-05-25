@@ -16,22 +16,16 @@ public final class GssEncryptionResponse implements InitialMessage, BackendMessa
         return supported;
     }
 
-    /** Single-byte response code sent on the wire. */
-    public int responseCode() {
-        return supported ? 'G' : 'N';
-    }
-
     @Override
     public int hashCode() {
-        return supported ? 1 : 0;
+        return Boolean.hashCode(supported);
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof GssEncryptionResponse)) {
+        } else if (!(other instanceof GssEncryptionResponse)) {
             return false;
         }
         GssEncryptionResponse otherGSSENCResponse = (GssEncryptionResponse) other;

@@ -35,8 +35,7 @@ public final class ReadyForQueryMessage implements TaggedMessage, BackendMessage
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof ReadyForQueryMessage)) {
+        } else if (!(other instanceof ReadyForQueryMessage)) {
             return false;
         }
         ReadyForQueryMessage otherReadyForQuery = (ReadyForQueryMessage) other;

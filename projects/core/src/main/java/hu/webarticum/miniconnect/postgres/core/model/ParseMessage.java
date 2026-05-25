@@ -20,9 +20,7 @@ public final class ParseMessage implements TaggedMessage, FrontendMessage {
         this.preparedStatementName = Objects.requireNonNull(preparedStatementName, "preparedStatementName");
         this.query = Objects.requireNonNull(query, "query");
         this.parameterTypeObjectIds = Objects.requireNonNull(parameterTypeObjectIds, "parameterTypeObjectIds");
-        for (Integer parameterTypeObjectId : parameterTypeObjectIds) {
-            Objects.requireNonNull(parameterTypeObjectId, "parameterTypeObjectId");
-        }
+        parameterTypeObjectIds.forEach(v -> Objects.requireNonNull(v, "parameterTypeObjectId"));
     }
 
     /** One-byte message type code used on the wire. */
@@ -55,14 +53,14 @@ public final class ParseMessage implements TaggedMessage, FrontendMessage {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof ParseMessage)) {
+        } else if (!(other instanceof ParseMessage)) {
             return false;
         }
         ParseMessage otherParse = (ParseMessage) other;
-        return preparedStatementName.equals(otherParse.preparedStatementName)
-                && query.equals(otherParse.query)
-                && parameterTypeObjectIds.equals(otherParse.parameterTypeObjectIds);
+        return
+                preparedStatementName.equals(otherParse.preparedStatementName) &&
+                query.equals(otherParse.query) &&
+                parameterTypeObjectIds.equals(otherParse.parameterTypeObjectIds);
     }
 
     @Override

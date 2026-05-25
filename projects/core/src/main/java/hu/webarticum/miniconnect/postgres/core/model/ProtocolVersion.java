@@ -9,8 +9,6 @@ public final class ProtocolVersion {
 
     public static final ProtocolVersion V3_0 = new ProtocolVersion(3, 0);
 
-    public static final ProtocolVersion V3_1 = new ProtocolVersion(3, 1);
-
     public static final ProtocolVersion V3_2 = new ProtocolVersion(3, 2);
 
     private final int major;
@@ -25,12 +23,12 @@ public final class ProtocolVersion {
     }
 
     public static ProtocolVersion of(int major, int minor) {
-        if (major == V3_0.major && minor == V3_0.minor) {
-            return V3_0;
-        } else if (major == V3_1.major && minor == V3_1.minor) {
-            return V3_1;
-        } else if (major == V3_2.major && minor == V3_2.minor) {
-            return V3_2;
+        if (major == 3) {
+            if (minor == 0) {
+                return V3_0;
+            } else if (minor == 2) {
+                return V3_2;
+            }
         }
         return new ProtocolVersion(major, minor);
     }
@@ -69,13 +67,13 @@ public final class ProtocolVersion {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof ProtocolVersion)) {
+        } else if (!(other instanceof ProtocolVersion)) {
             return false;
         }
         ProtocolVersion otherProtocolVersion = (ProtocolVersion) other;
-        return major == otherProtocolVersion.major
-                && minor == otherProtocolVersion.minor;
+        return
+                major == otherProtocolVersion.major &&
+                minor == otherProtocolVersion.minor;
     }
 
     @Override

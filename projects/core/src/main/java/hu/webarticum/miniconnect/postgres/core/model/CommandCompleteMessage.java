@@ -35,8 +35,7 @@ public final class CommandCompleteMessage implements TaggedMessage, BackendMessa
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof CommandCompleteMessage)) {
+        } else if (!(other instanceof CommandCompleteMessage)) {
             return false;
         }
         CommandCompleteMessage otherCommandComplete = (CommandCompleteMessage) other;

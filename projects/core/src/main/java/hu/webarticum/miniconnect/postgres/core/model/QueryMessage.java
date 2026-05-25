@@ -35,8 +35,7 @@ public final class QueryMessage implements TaggedMessage, FrontendMessage {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof QueryMessage)) {
+        } else if (!(other instanceof QueryMessage)) {
             return false;
         }
         QueryMessage otherQuery = (QueryMessage) other;

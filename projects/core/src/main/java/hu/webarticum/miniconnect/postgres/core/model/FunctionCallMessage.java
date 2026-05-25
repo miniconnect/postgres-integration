@@ -25,13 +25,9 @@ public final class FunctionCallMessage implements TaggedMessage, FrontendMessage
             FormatCode resultFormatCode) {
         this.functionObjectId = functionObjectId;
         this.argumentFormatCodes = Objects.requireNonNull(argumentFormatCodes, "argumentFormatCodes");
-        for (FormatCode argumentFormatCode : argumentFormatCodes) {
-            Objects.requireNonNull(argumentFormatCode, "argumentFormatCode");
-        }
+        argumentFormatCodes.forEach(v -> Objects.requireNonNull(v, "argumentFormatCode"));
         this.arguments = Objects.requireNonNull(arguments, "arguments");
-        for (NullableValue argument : arguments) {
-            Objects.requireNonNull(argument, "argument");
-        }
+        arguments.forEach(v -> Objects.requireNonNull(v, "argument"));
         this.resultFormatCode = Objects.requireNonNull(resultFormatCode, "resultFormatCode");
     }
 
@@ -70,15 +66,15 @@ public final class FunctionCallMessage implements TaggedMessage, FrontendMessage
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof FunctionCallMessage)) {
+        } else if (!(other instanceof FunctionCallMessage)) {
             return false;
         }
         FunctionCallMessage otherFunctionCall = (FunctionCallMessage) other;
-        return functionObjectId == otherFunctionCall.functionObjectId
-                && resultFormatCode == otherFunctionCall.resultFormatCode
-                && argumentFormatCodes.equals(otherFunctionCall.argumentFormatCodes)
-                && arguments.equals(otherFunctionCall.arguments);
+        return
+                functionObjectId == otherFunctionCall.functionObjectId &&
+                resultFormatCode == otherFunctionCall.resultFormatCode &&
+                argumentFormatCodes.equals(otherFunctionCall.argumentFormatCodes) &&
+                arguments.equals(otherFunctionCall.arguments);
     }
 
     @Override

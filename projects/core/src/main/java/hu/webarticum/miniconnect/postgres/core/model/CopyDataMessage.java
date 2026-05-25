@@ -29,15 +29,14 @@ public final class CopyDataMessage implements TaggedMessage, FrontendMessage, Ba
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(data);
+        return data.hashCode();
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof CopyDataMessage)) {
+        } else if (!(other instanceof CopyDataMessage)) {
             return false;
         }
         CopyDataMessage otherCopyData = (CopyDataMessage) other;

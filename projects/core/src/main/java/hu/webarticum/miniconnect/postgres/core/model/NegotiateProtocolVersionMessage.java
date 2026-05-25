@@ -20,9 +20,7 @@ public final class NegotiateProtocolVersionMessage implements TaggedMessage, Bac
         this.newestSupportedMinorVersion = newestSupportedMinorVersion;
         this.unrecognizedProtocolOptions =
                 Objects.requireNonNull(unrecognizedProtocolOptions, "unrecognizedProtocolOptions");
-        for (String unrecognizedProtocolOption : unrecognizedProtocolOptions) {
-            Objects.requireNonNull(unrecognizedProtocolOption, "unrecognizedProtocolOption");
-        }
+        unrecognizedProtocolOptions.forEach(v -> Objects.requireNonNull(v, "unrecognizedProtocolOption"));
     }
 
     /** One-byte message type code used on the wire. */
@@ -50,14 +48,14 @@ public final class NegotiateProtocolVersionMessage implements TaggedMessage, Bac
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof NegotiateProtocolVersionMessage)) {
+        } else if (!(other instanceof NegotiateProtocolVersionMessage)) {
             return false;
         }
         NegotiateProtocolVersionMessage otherNegotiateProtocolVersion =
                 (NegotiateProtocolVersionMessage) other;
-        return newestSupportedMinorVersion == otherNegotiateProtocolVersion.newestSupportedMinorVersion
-                && unrecognizedProtocolOptions.equals(otherNegotiateProtocolVersion.unrecognizedProtocolOptions);
+        return
+                newestSupportedMinorVersion == otherNegotiateProtocolVersion.newestSupportedMinorVersion &&
+                unrecognizedProtocolOptions.equals(otherNegotiateProtocolVersion.unrecognizedProtocolOptions);
     }
 
     @Override

@@ -6,9 +6,7 @@ import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
 /** Authentication request requiring an MD5-encrypted password. */
-public final class AuthenticationMd5PasswordMessage implements TaggedMessage, BackendMessage {
-
-    public static final int MESSAGE_TYPE = 'R';
+public final class AuthenticationMd5PasswordMessage implements AuthenticationMessage {
 
     public static final int AUTHENTICATION_CODE = 5;
 
@@ -18,13 +16,8 @@ public final class AuthenticationMd5PasswordMessage implements TaggedMessage, Ba
         this.salt = Objects.requireNonNull(salt, "salt");
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Authentication request code carried in the message. */
+    @Override
     public int authenticationCode() {
         return AUTHENTICATION_CODE;
     }
@@ -36,19 +29,17 @@ public final class AuthenticationMd5PasswordMessage implements TaggedMessage, Ba
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(salt);
+        return salt.hashCode();
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof AuthenticationMd5PasswordMessage)) {
+        } else if (!(other instanceof AuthenticationMd5PasswordMessage)) {
             return false;
         }
-        AuthenticationMd5PasswordMessage otherAuthenticationMd5Password =
-                (AuthenticationMd5PasswordMessage) other;
+        AuthenticationMd5PasswordMessage otherAuthenticationMd5Password = (AuthenticationMd5PasswordMessage) other;
         return Objects.equals(salt, otherAuthenticationMd5Password.salt);
     }
 

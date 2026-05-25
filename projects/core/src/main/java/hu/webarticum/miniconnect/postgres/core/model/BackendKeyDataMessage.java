@@ -37,20 +37,20 @@ public final class BackendKeyDataMessage implements TaggedMessage, BackendMessag
 
     @Override
     public int hashCode() {
-        return 31 * processId + Objects.hashCode(secretKey);
+        return Objects.hash(processId, secretKey);
     }
 
     @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof BackendKeyDataMessage)) {
+        } else if (!(other instanceof BackendKeyDataMessage)) {
             return false;
         }
         BackendKeyDataMessage otherBackendKeyData = (BackendKeyDataMessage) other;
-        return processId == otherBackendKeyData.processId
-                && Objects.equals(secretKey, otherBackendKeyData.secretKey);
+        return
+                processId == otherBackendKeyData.processId &&
+                Objects.equals(secretKey, otherBackendKeyData.secretKey);
     }
 
     @Override

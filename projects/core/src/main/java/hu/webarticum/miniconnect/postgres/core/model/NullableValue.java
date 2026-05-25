@@ -53,13 +53,13 @@ public final class NullableValue {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof NullableValue)) {
+        } else if (!(other instanceof NullableValue)) {
             return false;
         }
         NullableValue otherNullableValue = (NullableValue) other;
-        return nullValue == otherNullableValue.nullValue
-                && bytes.equals(otherNullableValue.bytes);
+        return
+                nullValue == otherNullableValue.nullValue &&
+                bytes.equals(otherNullableValue.bytes);
     }
 
     @Override

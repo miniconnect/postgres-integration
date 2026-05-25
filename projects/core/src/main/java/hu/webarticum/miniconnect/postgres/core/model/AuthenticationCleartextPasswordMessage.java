@@ -3,19 +3,12 @@ package hu.webarticum.miniconnect.postgres.core.model;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
 /** Authentication request requiring a clear-text password. */
-public final class AuthenticationCleartextPasswordMessage implements TaggedMessage, BackendMessage {
-
-    public static final int MESSAGE_TYPE = 'R';
+public final class AuthenticationCleartextPasswordMessage implements AuthenticationMessage {
 
     public static final int AUTHENTICATION_CODE = 3;
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Authentication request code carried in the message. */
+    @Override
     public int authenticationCode() {
         return AUTHENTICATION_CODE;
     }

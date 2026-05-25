@@ -35,8 +35,7 @@ public final class CloseStatementMessage implements TaggedMessage, FrontendMessa
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        }
-        if (!(other instanceof CloseStatementMessage)) {
+        } else if (!(other instanceof CloseStatementMessage)) {
             return false;
         }
         CloseStatementMessage otherCloseStatement = (CloseStatementMessage) other;
