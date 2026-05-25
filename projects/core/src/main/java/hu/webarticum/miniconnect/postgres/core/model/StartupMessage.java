@@ -11,41 +11,33 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Startup packet carrying protocol version and connection parameters. */
 public final class StartupMessage implements InitialMessage, FrontendMessage {
 
-    public static final int PROTOCOL_VERSION_3_0 = 196608;
-
-    public static final int PROTOCOL_VERSION_3_1 = 196609;
-
-    public static final int PROTOCOL_VERSION_3_2 = 196610;
-
-    private final int protocolVersion;
+    private final ProtocolVersion protocolVersion;
 
     private final ImmutableList<StartupParameter> parameters;
 
-    public StartupMessage(int protocolVersion, ImmutableList<StartupParameter> parameters) {
-        this.protocolVersion = protocolVersion;
+    public StartupMessage(ProtocolVersion protocolVersion, ImmutableList<StartupParameter> parameters) {
+        this.protocolVersion = Objects.requireNonNull(protocolVersion, "protocolVersion");
         this.parameters = Objects.requireNonNull(parameters, "parameters");
         for (StartupParameter parameter : parameters) {
             Objects.requireNonNull(parameter, "parameter");
         }
     }
 
-    public StartupMessage(int protocolVersion, Map<String, String> parameters) {
+    public StartupMessage(ProtocolVersion protocolVersion, Map<String, String> parameters) {
         this(protocolVersion, toParameters(parameters));
     }
 
-    /** Protocol version number requested by the frontend. */
-    public int protocolVersion() {
+    public StartupMessage(int protocolVersion, ImmutableList<StartupParameter> parameters) {
+        this(ProtocolVersion.ofInt(protocolVersion), parameters);
+    }
+
+    public StartupMessage(int protocolVersion, Map<String, String> parameters) {
+        this(ProtocolVersion.ofInt(protocolVersion), parameters);
+    }
+
+    /** Protocol version requested by the frontend. */
+    public ProtocolVersion protocolVersion() {
         return protocolVersion;
-    }
-
-    /** Major part of the requested protocol version. */
-    public int protocolMajorVersion() {
-        return (protocolVersion >>> 16) & 0xFFFF;
-    }
-
-    /** Minor part of the requested protocol version. */
-    public int protocolMinorVersion() {
-        return protocolVersion & 0xFFFF;
     }
 
     /** Startup parameter name-value pairs. */
@@ -90,7 +82,7 @@ public final class StartupMessage implements InitialMessage, FrontendMessage {
             return false;
         }
         StartupMessage otherStartupMessage = (StartupMessage) other;
-        return protocolVersion == otherStartupMessage.protocolVersion
+        return protocolVersion.equals(otherStartupMessage.protocolVersion)
                 && parameters.equals(otherStartupMessage.parameters);
     }
 

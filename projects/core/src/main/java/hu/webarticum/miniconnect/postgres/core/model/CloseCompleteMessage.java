@@ -2,7 +2,7 @@ package hu.webarticum.miniconnect.postgres.core.model;
 
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/** CloseMessage-complete indicator. */
+/** Close-complete indicator. */
 public final class CloseCompleteMessage implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = '3';

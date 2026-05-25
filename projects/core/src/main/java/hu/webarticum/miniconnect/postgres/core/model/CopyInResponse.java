@@ -10,14 +10,14 @@ public final class CopyInResponse implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'G';
 
-    private final int overallFormatCode;
+    private final FormatCode overallFormatCode;
 
-    private final ImmutableList<Integer> columnFormatCodes;
+    private final ImmutableList<FormatCode> columnFormatCodes;
 
-    public CopyInResponse(int overallFormatCode, ImmutableList<Integer> columnFormatCodes) {
-        this.overallFormatCode = overallFormatCode;
+    public CopyInResponse(FormatCode overallFormatCode, ImmutableList<FormatCode> columnFormatCodes) {
+        this.overallFormatCode = Objects.requireNonNull(overallFormatCode, "overallFormatCode");
         this.columnFormatCodes = Objects.requireNonNull(columnFormatCodes, "columnFormatCodes");
-        for (Integer columnFormatCode : columnFormatCodes) {
+        for (FormatCode columnFormatCode : columnFormatCodes) {
             Objects.requireNonNull(columnFormatCode, "columnFormatCode");
         }
     }
@@ -29,12 +29,12 @@ public final class CopyInResponse implements TaggedMessage, BackendMessage {
     }
 
     /** Overall COPY format code. */
-    public int overallFormatCode() {
+    public FormatCode overallFormatCode() {
         return overallFormatCode;
     }
 
     /** Format codes for each copied column. */
-    public ImmutableList<Integer> columnFormatCodes() {
+    public ImmutableList<FormatCode> columnFormatCodes() {
         return columnFormatCodes;
     }
 

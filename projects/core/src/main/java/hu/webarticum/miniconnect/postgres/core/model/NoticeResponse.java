@@ -8,46 +8,10 @@ import java.util.Objects;
 import hu.webarticum.miniconnect.lang.ImmutableList;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
-/** Notice message made of identified string fields. */
+/** Notice response made of protocol fields. */
 public final class NoticeResponse implements TaggedMessage, BackendMessage {
 
     public static final int MESSAGE_TYPE = 'N';
-
-    public static final char FIELD_SEVERITY = 'S';
-
-    public static final char FIELD_SEVERITY_NON_LOCALIZED = 'V';
-
-    public static final char FIELD_SQLSTATE = 'C';
-
-    public static final char FIELD_MESSAGE = 'M';
-
-    public static final char FIELD_DETAIL = 'D';
-
-    public static final char FIELD_HINT = 'H';
-
-    public static final char FIELD_POSITION = 'P';
-
-    public static final char FIELD_INTERNAL_POSITION = 'p';
-
-    public static final char FIELD_INTERNAL_QUERY = 'q';
-
-    public static final char FIELD_WHERE = 'W';
-
-    public static final char FIELD_SCHEMA_NAME = 's';
-
-    public static final char FIELD_TABLE_NAME = 't';
-
-    public static final char FIELD_COLUMN_NAME = 'c';
-
-    public static final char FIELD_DATA_TYPE_NAME = 'd';
-
-    public static final char FIELD_CONSTRAINT_NAME = 'n';
-
-    public static final char FIELD_FILE = 'F';
-
-    public static final char FIELD_LINE = 'L';
-
-    public static final char FIELD_ROUTINE = 'R';
 
     private final ImmutableList<ResponseField> fields;
 
@@ -68,12 +32,17 @@ public final class NoticeResponse implements TaggedMessage, BackendMessage {
         return MESSAGE_TYPE;
     }
 
-    /** Identified notice fields in protocol form. */
+    /** Notice fields in protocol order. */
     public ImmutableList<ResponseField> fields() {
         return fields;
     }
 
-    /** Value of a single identified notice field. */
+    /** Value of the last notice field with the given type. */
+    public String field(ResponseFieldType fieldType) {
+        return field(Objects.requireNonNull(fieldType, "fieldType").code());
+    }
+
+    /** Value of the last notice field with the given type code. */
     public String field(char fieldType) {
         for (int i = fields.size() - 1; i >= 0; i--) {
             ResponseField field = fields.get(i);

@@ -11,6 +11,10 @@ public final class ResponseField {
 
     private final String value;
 
+    public ResponseField(ResponseFieldType type, String value) {
+        this(Objects.requireNonNull(type, "type").code(), value);
+    }
+
     public ResponseField(char type, String value) {
         this.type = type;
         this.value = Objects.requireNonNull(value, "value");

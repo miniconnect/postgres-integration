@@ -19,7 +19,7 @@ public final class FieldDescription {
 
     private final int typeModifier;
 
-    private final int formatCode;
+    private final FormatCode formatCode;
 
     public FieldDescription(
             String name,
@@ -28,14 +28,14 @@ public final class FieldDescription {
             int dataTypeObjectId,
             int dataTypeSize,
             int typeModifier,
-            int formatCode) {
+            FormatCode formatCode) {
         this.name = Objects.requireNonNull(name, "name");
         this.tableObjectId = tableObjectId;
         this.columnAttributeNumber = columnAttributeNumber;
         this.dataTypeObjectId = dataTypeObjectId;
         this.dataTypeSize = dataTypeSize;
         this.typeModifier = typeModifier;
-        this.formatCode = formatCode;
+        this.formatCode = Objects.requireNonNull(formatCode, "formatCode");
     }
 
     /** Field name. */
@@ -69,7 +69,7 @@ public final class FieldDescription {
     }
 
     /** Format code used for the field. */
-    public int formatCode() {
+    public FormatCode formatCode() {
         return formatCode;
     }
 

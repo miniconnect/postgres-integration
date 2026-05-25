@@ -12,27 +12,27 @@ public final class FunctionCallMessage implements TaggedMessage, FrontendMessage
 
     private final int functionObjectId;
 
-    private final ImmutableList<Integer> argumentFormatCodes;
+    private final ImmutableList<FormatCode> argumentFormatCodes;
 
     private final ImmutableList<NullableValue> arguments;
 
-    private final int resultFormatCode;
+    private final FormatCode resultFormatCode;
 
     public FunctionCallMessage(
             int functionObjectId,
-            ImmutableList<Integer> argumentFormatCodes,
+            ImmutableList<FormatCode> argumentFormatCodes,
             ImmutableList<NullableValue> arguments,
-            int resultFormatCode) {
+            FormatCode resultFormatCode) {
         this.functionObjectId = functionObjectId;
         this.argumentFormatCodes = Objects.requireNonNull(argumentFormatCodes, "argumentFormatCodes");
-        for (Integer argumentFormatCode : argumentFormatCodes) {
+        for (FormatCode argumentFormatCode : argumentFormatCodes) {
             Objects.requireNonNull(argumentFormatCode, "argumentFormatCode");
         }
         this.arguments = Objects.requireNonNull(arguments, "arguments");
         for (NullableValue argument : arguments) {
             Objects.requireNonNull(argument, "argument");
         }
-        this.resultFormatCode = resultFormatCode;
+        this.resultFormatCode = Objects.requireNonNull(resultFormatCode, "resultFormatCode");
     }
 
     /** One-byte message type code used on the wire. */
@@ -47,7 +47,7 @@ public final class FunctionCallMessage implements TaggedMessage, FrontendMessage
     }
 
     /** Format codes for function argument values. */
-    public ImmutableList<Integer> argumentFormatCodes() {
+    public ImmutableList<FormatCode> argumentFormatCodes() {
         return argumentFormatCodes;
     }
 
@@ -57,7 +57,7 @@ public final class FunctionCallMessage implements TaggedMessage, FrontendMessage
     }
 
     /** Format code requested for the function result. */
-    public int resultFormatCode() {
+    public FormatCode resultFormatCode() {
         return resultFormatCode;
     }
 

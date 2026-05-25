@@ -14,22 +14,22 @@ public final class BindMessage implements TaggedMessage, FrontendMessage {
 
     private final String sourcePreparedStatementName;
 
-    private final ImmutableList<Integer> parameterFormatCodes;
+    private final ImmutableList<FormatCode> parameterFormatCodes;
 
     private final ImmutableList<NullableValue> parameterValues;
 
-    private final ImmutableList<Integer> resultFormatCodes;
+    private final ImmutableList<FormatCode> resultFormatCodes;
 
     public BindMessage(
             String destinationPortalName,
             String sourcePreparedStatementName,
-            ImmutableList<Integer> parameterFormatCodes,
+            ImmutableList<FormatCode> parameterFormatCodes,
             ImmutableList<NullableValue> parameterValues,
-            ImmutableList<Integer> resultFormatCodes) {
+            ImmutableList<FormatCode> resultFormatCodes) {
         this.destinationPortalName = Objects.requireNonNull(destinationPortalName, "destinationPortalName");
         this.sourcePreparedStatementName = Objects.requireNonNull(sourcePreparedStatementName, "sourcePreparedStatementName");
         this.parameterFormatCodes = Objects.requireNonNull(parameterFormatCodes, "parameterFormatCodes");
-        for (Integer parameterFormatCode : parameterFormatCodes) {
+        for (FormatCode parameterFormatCode : parameterFormatCodes) {
             Objects.requireNonNull(parameterFormatCode, "parameterFormatCode");
         }
         this.parameterValues = Objects.requireNonNull(parameterValues, "parameterValues");
@@ -37,7 +37,7 @@ public final class BindMessage implements TaggedMessage, FrontendMessage {
             Objects.requireNonNull(parameterValue, "parameterValue");
         }
         this.resultFormatCodes = Objects.requireNonNull(resultFormatCodes, "resultFormatCodes");
-        for (Integer resultFormatCode : resultFormatCodes) {
+        for (FormatCode resultFormatCode : resultFormatCodes) {
             Objects.requireNonNull(resultFormatCode, "resultFormatCode");
         }
     }
@@ -59,7 +59,7 @@ public final class BindMessage implements TaggedMessage, FrontendMessage {
     }
 
     /** Format codes for parameter values. */
-    public ImmutableList<Integer> parameterFormatCodes() {
+    public ImmutableList<FormatCode> parameterFormatCodes() {
         return parameterFormatCodes;
     }
 
@@ -69,7 +69,7 @@ public final class BindMessage implements TaggedMessage, FrontendMessage {
     }
 
     /** Format codes requested for result columns. */
-    public ImmutableList<Integer> resultFormatCodes() {
+    public ImmutableList<FormatCode> resultFormatCodes() {
         return resultFormatCodes;
     }
 
