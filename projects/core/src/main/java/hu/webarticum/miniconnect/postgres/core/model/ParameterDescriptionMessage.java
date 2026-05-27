@@ -8,19 +8,17 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Parameter type description for a prepared statement. */
 public final class ParameterDescriptionMessage implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 't';
-
     private final ImmutableList<Integer> parameterTypeObjectIds;
 
     public ParameterDescriptionMessage(ImmutableList<Integer> parameterTypeObjectIds) {
         this.parameterTypeObjectIds = Objects.requireNonNull(parameterTypeObjectIds, "parameterTypeObjectIds");
+        int parameterTypeObjectIdCount = parameterTypeObjectIds.size();
+        if (parameterTypeObjectIdCount > 0xFFFF) {
+            throw new IllegalArgumentException(String.format(
+                    "parameterTypeObjectIds size must be at most 65535, but was %d",
+                    parameterTypeObjectIdCount));
+        }
         parameterTypeObjectIds.forEach(v -> Objects.requireNonNull(v, "parameterTypeObjectId"));
-    }
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
     }
 
     /** Object IDs of statement parameter data types. */
@@ -47,7 +45,7 @@ public final class ParameterDescriptionMessage implements TaggedMessage, Backend
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("parameterTypeObjectIds", parameterTypeObjectIds)
+                .add("parameterTypeObjectIdCount", parameterTypeObjectIds.size())
                 .build();
     }
 

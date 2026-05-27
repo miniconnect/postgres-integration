@@ -7,22 +7,14 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Describe command for a statement. */
 public final class DescribeStatementMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'D';
+    private final CString statementName;
 
-    private final String statementName;
-
-    public DescribeStatementMessage(String statementName) {
+    public DescribeStatementMessage(CString statementName) {
         this.statementName = Objects.requireNonNull(statementName, "statementName");
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Name of the statement to describe. */
-    public String statementName() {
+    public CString statementName() {
         return statementName;
     }
 

@@ -5,14 +5,6 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** FlushMessage command requesting pending backend output. */
 public final class FlushMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'H';
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     @Override
     public int hashCode() {
         return FlushMessage.class.hashCode();

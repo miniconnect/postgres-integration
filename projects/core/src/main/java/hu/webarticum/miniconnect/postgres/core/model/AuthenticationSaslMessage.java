@@ -8,23 +8,15 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Authentication request listing supported SASL mechanisms. */
 public final class AuthenticationSaslMessage implements AuthenticationMessage {
 
-    public static final int AUTHENTICATION_CODE = 10;
+    private final ImmutableList<CString> mechanismNames;
 
-    private final ImmutableList<String> mechanismNames;
-
-    public AuthenticationSaslMessage(ImmutableList<String> mechanismNames) {
+    public AuthenticationSaslMessage(ImmutableList<CString> mechanismNames) {
         this.mechanismNames = Objects.requireNonNull(mechanismNames, "mechanismNames");
         mechanismNames.forEach(v -> Objects.requireNonNull(v, "mechanismName"));
     }
 
-    /** Authentication request code carried in the message. */
-    @Override
-    public int authenticationCode() {
-        return AUTHENTICATION_CODE;
-    }
-
     /** SASL mechanism names in server preference order. */
-    public ImmutableList<String> mechanismNames() {
+    public ImmutableList<CString> mechanismNames() {
         return mechanismNames;
     }
 
@@ -47,7 +39,7 @@ public final class AuthenticationSaslMessage implements AuthenticationMessage {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("mechanismNames", mechanismNames)
+                .add("mechanismNameCount", mechanismNames.size())
                 .build();
     }
 

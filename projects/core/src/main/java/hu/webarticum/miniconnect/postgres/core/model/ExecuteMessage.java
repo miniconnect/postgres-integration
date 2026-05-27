@@ -7,25 +7,20 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** ExecuteMessage command for a portal. */
 public final class ExecuteMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'E';
-
-    private final String portalName;
+    private final CString portalName;
 
     private final int maximumRowCount;
 
-    public ExecuteMessage(String portalName, int maximumRowCount) {
+    public ExecuteMessage(CString portalName, int maximumRowCount) {
         this.portalName = Objects.requireNonNull(portalName, "portalName");
+        if (maximumRowCount < 0) {
+            throw new IllegalArgumentException("maximumRowCount must be non-negative");
+        }
         this.maximumRowCount = maximumRowCount;
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Portal name to execute, empty for the unnamed portal. */
-    public String portalName() {
+    public CString portalName() {
         return portalName;
     }
 

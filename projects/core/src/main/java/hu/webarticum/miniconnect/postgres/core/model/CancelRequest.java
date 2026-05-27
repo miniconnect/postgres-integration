@@ -2,19 +2,21 @@ package hu.webarticum.miniconnect.postgres.core.model;
 
 import java.util.Objects;
 
-import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
 /** Request to cancel work running in a target backend. */
 public final class CancelRequest implements InitialMessage, FrontendMessage {
 
-    public static final int REQUEST_CODE = 80877102;
-
     private final int processId;
 
-    private final ByteString secretKey;
+    private final CancellationKey secretKey;
 
-    public CancelRequest(int processId, ByteString secretKey) {
+    /**
+     * Creates a cancellation request.
+     *
+     * <p>The secret key is represented by {@link CancellationKey}, which enforces the protocol length constraints.
+     */
+    public CancelRequest(int processId, CancellationKey secretKey) {
         this.processId = processId;
         this.secretKey = Objects.requireNonNull(secretKey, "secretKey");
     }
@@ -24,8 +26,10 @@ public final class CancelRequest implements InitialMessage, FrontendMessage {
         return processId;
     }
 
-    /** Secret key for the target backend. */
-    public ByteString secretKey() {
+    /**
+     * Secret key for the target backend.
+     */
+    public CancellationKey secretKey() {
         return secretKey;
     }
 
@@ -51,7 +55,7 @@ public final class CancelRequest implements InitialMessage, FrontendMessage {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("processId", processId)
-                .add("secretKey", secretKey)
+                .add("secretKeyLength", secretKey.bytes().length())
                 .build();
     }
 

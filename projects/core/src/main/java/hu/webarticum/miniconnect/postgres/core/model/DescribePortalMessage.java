@@ -7,22 +7,14 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Describe command for a portal. */
 public final class DescribePortalMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'D';
+    private final CString portalName;
 
-    private final String portalName;
-
-    public DescribePortalMessage(String portalName) {
+    public DescribePortalMessage(CString portalName) {
         this.portalName = Objects.requireNonNull(portalName, "portalName");
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Name of the portal to describe. */
-    public String portalName() {
+    public CString portalName() {
         return portalName;
     }
 

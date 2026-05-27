@@ -7,22 +7,14 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Command-completed response with a command tag. */
 public final class CommandCompleteMessage implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'C';
+    private final CString commandTag;
 
-    private final String commandTag;
-
-    public CommandCompleteMessage(String commandTag) {
+    public CommandCompleteMessage(CString commandTag) {
         this.commandTag = Objects.requireNonNull(commandTag, "commandTag");
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Command tag identifying the completed SQL command. */
-    public String commandTag() {
+    public CString commandTag() {
         return commandTag;
     }
 

@@ -1,35 +1,24 @@
 package hu.webarticum.miniconnect.postgres.core.model;
 
-import java.util.Objects;
-
-import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
 /** Authentication request requiring an MD5-encrypted password. */
 public final class AuthenticationMd5PasswordMessage implements AuthenticationMessage {
 
-    public static final int AUTHENTICATION_CODE = 5;
+    private final int salt;
 
-    private final ByteString salt;
-
-    public AuthenticationMd5PasswordMessage(ByteString salt) {
-        this.salt = Objects.requireNonNull(salt, "salt");
-    }
-
-    /** Authentication request code carried in the message. */
-    @Override
-    public int authenticationCode() {
-        return AUTHENTICATION_CODE;
+    public AuthenticationMd5PasswordMessage(int salt) {
+        this.salt = salt;
     }
 
     /** Salt to use when encrypting the password. */
-    public ByteString salt() {
+    public int salt() {
         return salt;
     }
 
     @Override
     public int hashCode() {
-        return salt.hashCode();
+        return Integer.hashCode(salt);
     }
 
     @Override
@@ -40,7 +29,7 @@ public final class AuthenticationMd5PasswordMessage implements AuthenticationMes
             return false;
         }
         AuthenticationMd5PasswordMessage otherAuthenticationMd5Password = (AuthenticationMd5PasswordMessage) other;
-        return Objects.equals(salt, otherAuthenticationMd5Password.salt);
+        return salt == otherAuthenticationMd5Password.salt;
     }
 
     @Override

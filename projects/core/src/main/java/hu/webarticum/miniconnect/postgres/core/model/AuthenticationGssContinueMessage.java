@@ -8,18 +8,10 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Authentication request carrying GSSAPI or SSPI data. */
 public final class AuthenticationGssContinueMessage implements AuthenticationMessage {
 
-    public static final int AUTHENTICATION_CODE = 8;
-
     private final ByteString data;
 
     public AuthenticationGssContinueMessage(ByteString data) {
         this.data = Objects.requireNonNull(data, "data");
-    }
-
-    /** Authentication request code carried in the message. */
-    @Override
-    public int authenticationCode() {
-        return AUTHENTICATION_CODE;
     }
 
     /** GSSAPI or SSPI authentication data bytes. */
@@ -45,9 +37,7 @@ public final class AuthenticationGssContinueMessage implements AuthenticationMes
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("data", data)
-                .build();
+        return new ToStringBuilder(this).add("dataLength", data.length()).build();
     }
 
 }

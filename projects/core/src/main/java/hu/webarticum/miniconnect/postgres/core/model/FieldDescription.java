@@ -7,7 +7,7 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Metadata for one field in a RowDescriptionMessage message. */
 public final class FieldDescription {
 
-    private final String name;
+    private final CString name;
 
     private final int tableObjectId;
 
@@ -22,7 +22,7 @@ public final class FieldDescription {
     private final FormatCode formatCode;
 
     public FieldDescription(
-            String name,
+            CString name,
             int tableObjectId,
             int columnAttributeNumber,
             int dataTypeObjectId,
@@ -39,7 +39,7 @@ public final class FieldDescription {
     }
 
     /** Field name. */
-    public String name() {
+    public CString name() {
         return name;
     }
 

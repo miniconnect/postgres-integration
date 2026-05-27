@@ -7,22 +7,14 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Close command for a statement. */
 public final class CloseStatementMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'C';
+    private final CString statementName;
 
-    private final String statementName;
-
-    public CloseStatementMessage(String statementName) {
+    public CloseStatementMessage(CString statementName) {
         this.statementName = Objects.requireNonNull(statementName, "statementName");
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Name of the statement to close. */
-    public String statementName() {
+    public CString statementName() {
         return statementName;
     }
 

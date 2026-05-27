@@ -66,7 +66,7 @@ public final class NullableValue {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("isNull", nullValue)
-                .add("bytes", bytes)
+                .add("bytesLength", nullValue ? 0 : bytes.length())
                 .build();
     }
 

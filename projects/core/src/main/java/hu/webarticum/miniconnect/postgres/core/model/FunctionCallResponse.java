@@ -7,18 +7,10 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Function-call result message. */
 public final class FunctionCallResponse implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'V';
-
     private final NullableValue result;
 
     public FunctionCallResponse(NullableValue result) {
         this.result = Objects.requireNonNull(result, "result");
-    }
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
     }
 
     /** Function result value. */
@@ -45,7 +37,8 @@ public final class FunctionCallResponse implements TaggedMessage, BackendMessage
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("result", result)
+                .add("resultIsNull", result.isNull())
+                .add("resultLength", result.isNull() ? 0 : result.bytes().length())
                 .build();
     }
 

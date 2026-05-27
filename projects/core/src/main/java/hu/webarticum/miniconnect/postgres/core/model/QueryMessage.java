@@ -7,22 +7,14 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Simple QueryMessage protocol request containing a query string. */
 public final class QueryMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'Q';
+    private final CString query;
 
-    private final String query;
-
-    public QueryMessage(String query) {
+    public QueryMessage(CString query) {
         this.query = Objects.requireNonNull(query, "query");
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** QueryMessage string to execute using the Simple QueryMessage protocol. */
-    public String query() {
+    public CString query() {
         return query;
     }
 
@@ -45,7 +37,7 @@ public final class QueryMessage implements TaggedMessage, FrontendMessage {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("query", query)
+                .add("queryByteLength", query.bytes().length())
                 .build();
     }
 

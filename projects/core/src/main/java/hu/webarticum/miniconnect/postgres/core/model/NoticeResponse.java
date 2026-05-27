@@ -8,19 +8,11 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Notice response made of protocol fields. */
 public final class NoticeResponse implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'N';
-
     private final ImmutableList<ResponseField> fields;
 
     public NoticeResponse(ImmutableList<ResponseField> fields) {
         this.fields = Objects.requireNonNull(fields, "fields");
         fields.forEach(v -> Objects.requireNonNull(v, "field"));
-    }
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
     }
 
     /** Notice fields in protocol order. */
@@ -47,7 +39,7 @@ public final class NoticeResponse implements TaggedMessage, BackendMessage {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("fields", fields)
+                .add("fieldCount", fields.size())
                 .build();
     }
 

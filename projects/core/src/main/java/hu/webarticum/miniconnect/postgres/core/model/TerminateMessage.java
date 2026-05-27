@@ -5,14 +5,6 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Frontend request to close the connection. */
 public final class TerminateMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'X';
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     @Override
     public int hashCode() {
         return TerminateMessage.class.hashCode();

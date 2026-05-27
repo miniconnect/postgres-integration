@@ -5,14 +5,6 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Authentication request requiring GSSAPI. */
 public final class AuthenticationGssMessage implements AuthenticationMessage {
 
-    public static final int AUTHENTICATION_CODE = 7;
-
-    /** Authentication request code carried in the message. */
-    @Override
-    public int authenticationCode() {
-        return AUTHENTICATION_CODE;
-    }
-
     @Override
     public int hashCode() {
         return AuthenticationGssMessage.class.hashCode();

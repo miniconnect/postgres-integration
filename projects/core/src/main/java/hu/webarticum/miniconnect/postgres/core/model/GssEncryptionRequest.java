@@ -5,8 +5,6 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Startup request asking whether GSSAPI encryption is supported. */
 public final class GssEncryptionRequest implements InitialMessage, FrontendMessage {
 
-    public static final int REQUEST_CODE = 80877104;
-
     @Override
     public int hashCode() {
         return GssEncryptionRequest.class.hashCode();

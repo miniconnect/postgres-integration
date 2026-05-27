@@ -5,14 +5,6 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Indicator that no row description data is available. */
 public final class NoDataMessage implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'n';
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     @Override
     public int hashCode() {
         return NoDataMessage.class.hashCode();

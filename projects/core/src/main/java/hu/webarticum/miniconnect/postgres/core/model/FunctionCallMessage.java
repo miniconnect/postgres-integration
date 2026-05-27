@@ -8,8 +8,6 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Function-call request addressed by function object ID. */
 public final class FunctionCallMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'F';
-
     private final int functionObjectId;
 
     private final ImmutableList<FormatCode> argumentFormatCodes;
@@ -25,16 +23,27 @@ public final class FunctionCallMessage implements TaggedMessage, FrontendMessage
             FormatCode resultFormatCode) {
         this.functionObjectId = functionObjectId;
         this.argumentFormatCodes = Objects.requireNonNull(argumentFormatCodes, "argumentFormatCodes");
+        int argumentFormatCodeCount = argumentFormatCodes.size();
+        if (argumentFormatCodeCount > 0xFFFF) {
+            throw new IllegalArgumentException(String.format(
+                    "argumentFormatCodes size must be at most 65535, but was %d",
+                    argumentFormatCodeCount));
+        }
         argumentFormatCodes.forEach(v -> Objects.requireNonNull(v, "argumentFormatCode"));
         this.arguments = Objects.requireNonNull(arguments, "arguments");
+        int argumentCount = arguments.size();
+        if (argumentCount > 0xFFFF) {
+            throw new IllegalArgumentException(String.format(
+                    "arguments size must be at most 65535, but was %d",
+                    argumentCount));
+        }
         arguments.forEach(v -> Objects.requireNonNull(v, "argument"));
+        if (argumentFormatCodeCount != 0 && argumentFormatCodeCount != 1 && argumentFormatCodeCount != argumentCount) {
+            throw new IllegalArgumentException(String.format(
+                    "argumentFormatCodes size must be 0, 1, or equal to arguments size (%d), but was %d",
+                    argumentCount, argumentFormatCodeCount));
+        }
         this.resultFormatCode = Objects.requireNonNull(resultFormatCode, "resultFormatCode");
-    }
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
     }
 
     /** Object ID of the function to call. */
@@ -81,8 +90,8 @@ public final class FunctionCallMessage implements TaggedMessage, FrontendMessage
     public String toString() {
         return new ToStringBuilder(this)
                 .add("functionObjectId", functionObjectId)
-                .add("argumentFormatCodes", argumentFormatCodes)
-                .add("arguments", arguments)
+                .add("argumentFormatCodeCount", argumentFormatCodes.size())
+                .add("argumentCount", arguments.size())
                 .add("resultFormatCode", resultFormatCode)
                 .build();
     }

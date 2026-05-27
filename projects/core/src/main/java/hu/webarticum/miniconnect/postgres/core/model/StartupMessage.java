@@ -28,18 +28,6 @@ public final class StartupMessage implements InitialMessage, FrontendMessage {
         return parameters;
     }
 
-    /** Value of a single startup parameter. */
-    public String parameter(String name) {
-        Objects.requireNonNull(name, "name");
-        for (int i = parameters.size() - 1; i >= 0; i--) {
-            StartupParameter parameter = parameters.get(i);
-            if (parameter.name().equals(name)) {
-                return parameter.value();
-            }
-        }
-        return null;
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(protocolVersion, parameters);
@@ -62,7 +50,7 @@ public final class StartupMessage implements InitialMessage, FrontendMessage {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("protocolVersion", protocolVersion)
-                .add("parameters", parameters)
+                .add("parameterCount", parameters.size())
                 .build();
     }
 

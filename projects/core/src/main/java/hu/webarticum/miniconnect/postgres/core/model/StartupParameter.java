@@ -7,22 +7,22 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Single startup parameter name/value pair sent by the frontend. */
 public final class StartupParameter {
 
-    private final String name;
+    private final CString name;
 
-    private final String value;
+    private final CString value;
 
-    public StartupParameter(String name, String value) {
+    public StartupParameter(CString name, CString value) {
         this.name = Objects.requireNonNull(name, "name");
         this.value = Objects.requireNonNull(value, "value");
     }
 
     /** Startup parameter name. */
-    public String name() {
+    public CString name() {
         return name;
     }
 
     /** Startup parameter value. */
-    public String value() {
+    public CString value() {
         return value;
     }
 
@@ -48,7 +48,7 @@ public final class StartupParameter {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("value", value)
+                .add("valueByteLength", value.bytes().length())
                 .build();
     }
 

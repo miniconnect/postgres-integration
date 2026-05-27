@@ -5,14 +5,6 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Response to an empty query string. */
 public final class EmptyQueryResponse implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'I';
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     @Override
     public int hashCode() {
         return EmptyQueryResponse.class.hashCode();

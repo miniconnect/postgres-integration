@@ -7,30 +7,22 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Runtime parameter status reported by the backend. */
 public final class ParameterStatusMessage implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'S';
+    private final CString name;
 
-    private final String name;
+    private final CString value;
 
-    private final String value;
-
-    public ParameterStatusMessage(String name, String value) {
+    public ParameterStatusMessage(CString name, CString value) {
         this.name = Objects.requireNonNull(name, "name");
         this.value = Objects.requireNonNull(value, "value");
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Runtime parameter name. */
-    public String name() {
+    public CString name() {
         return name;
     }
 
     /** Runtime parameter value. */
-    public String value() {
+    public CString value() {
         return value;
     }
 
@@ -56,7 +48,7 @@ public final class ParameterStatusMessage implements TaggedMessage, BackendMessa
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name)
-                .add("value", value)
+                .add("valueByteLength", value.bytes().length())
                 .build();
     }
 

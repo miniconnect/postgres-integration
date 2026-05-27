@@ -8,8 +8,6 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Start Copy In response requiring frontend COPY data. */
 public final class CopyInResponse implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'G';
-
     private final FormatCode overallFormatCode;
 
     private final ImmutableList<FormatCode> columnFormatCodes;
@@ -17,13 +15,13 @@ public final class CopyInResponse implements TaggedMessage, BackendMessage {
     public CopyInResponse(FormatCode overallFormatCode, ImmutableList<FormatCode> columnFormatCodes) {
         this.overallFormatCode = Objects.requireNonNull(overallFormatCode, "overallFormatCode");
         this.columnFormatCodes = Objects.requireNonNull(columnFormatCodes, "columnFormatCodes");
+        int columnFormatCodeCount = columnFormatCodes.size();
+        if (columnFormatCodeCount > 0xFFFF) {
+            throw new IllegalArgumentException(String.format(
+                    "columnFormatCodes size must be at most 65535, but was %d",
+                    columnFormatCodeCount));
+        }
         columnFormatCodes.forEach(v -> Objects.requireNonNull(v, "columnFormatCode"));
-    }
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
     }
 
     /** Overall COPY format code. */

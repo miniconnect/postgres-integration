@@ -1,7 +1,8 @@
 package hu.webarticum.miniconnect.postgres.core.flow;
 
-import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ImmutableList;
+import hu.webarticum.miniconnect.postgres.core.model.CancellationKey;
+import hu.webarticum.miniconnect.postgres.core.model.CString;
 import hu.webarticum.miniconnect.postgres.core.model.ProtocolVersion;
 import hu.webarticum.miniconnect.postgres.core.model.StartupParameter;
 import hu.webarticum.miniconnect.postgres.core.model.TransactionStatus;
@@ -12,7 +13,7 @@ public interface ConnectionContext {
 
     public ImmutableList<StartupParameter> startupParameters();
 
-    public String startupParameter(String name);
+    public CString startupParameter(CString name);
 
     public ProtocolPhase protocolPhase();
 
@@ -24,7 +25,7 @@ public interface ConnectionContext {
 
     public int backendProcessId();
 
-    public ByteString cancellationSecretKey();
+    public CancellationKey cancellationSecretKey();
 
     public <T> T attribute(ConnectionAttributeKey<T> key);
 

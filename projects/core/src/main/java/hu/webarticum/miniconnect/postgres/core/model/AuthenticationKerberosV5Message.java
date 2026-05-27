@@ -5,14 +5,6 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Authentication request requiring Kerberos V5. */
 public final class AuthenticationKerberosV5Message implements AuthenticationMessage {
 
-    public static final int AUTHENTICATION_CODE = 2;
-
-    /** Authentication request code carried in the message. */
-    @Override
-    public int authenticationCode() {
-        return AUTHENTICATION_CODE;
-    }
-
     @Override
     public int hashCode() {
         return AuthenticationKerberosV5Message.class.hashCode();

@@ -9,24 +9,29 @@ public final class ResponseField {
 
     private final char type;
 
-    private final String value;
+    private final CString value;
 
-    public ResponseField(ResponseFieldType type, String value) {
+    public ResponseField(ResponseFieldType type, CString value) {
         this(Objects.requireNonNull(type, "type").code(), value);
     }
 
-    public ResponseField(char type, String value) {
+    public ResponseField(char type, CString value) {
+        if (type == '\0' || type > 0xFF) {
+            throw new IllegalArgumentException(String.format(
+                    "type must be a non-zero one-byte code, but was %d",
+                    Integer.valueOf(type)));
+        }
         this.type = type;
         this.value = Objects.requireNonNull(value, "value");
     }
 
-    /** Field type code as defined by the PostgreSQL protocol. */
+    /** Non-zero one-byte field type code as defined by the PostgreSQL protocol. */
     public char type() {
         return type;
     }
 
     /** Field value. */
-    public String value() {
+    public CString value() {
         return value;
     }
 
@@ -52,7 +57,7 @@ public final class ResponseField {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("type", Character.valueOf(type))
-                .add("value", value)
+                .add("valueByteLength", value.bytes().length())
                 .build();
     }
 

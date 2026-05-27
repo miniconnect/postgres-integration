@@ -7,22 +7,14 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Password response for password-based authentication. */
 public final class PasswordMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'p';
+    private final CString password;
 
-    private final String password;
-
-    public PasswordMessage(String password) {
+    public PasswordMessage(CString password) {
         this.password = Objects.requireNonNull(password, "password");
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Password or password-response string. */
-    public String password() {
+    public CString password() {
         return password;
     }
 

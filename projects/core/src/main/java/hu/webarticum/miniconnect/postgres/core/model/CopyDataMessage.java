@@ -8,18 +8,10 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** COPY data chunk in a COPY data stream. */
 public final class CopyDataMessage implements TaggedMessage, FrontendMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'd';
-
     private final ByteString data;
 
     public CopyDataMessage(ByteString data) {
         this.data = Objects.requireNonNull(data, "data");
-    }
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
     }
 
     /** COPY stream data bytes. */
@@ -46,7 +38,7 @@ public final class CopyDataMessage implements TaggedMessage, FrontendMessage, Ba
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("data", data)
+                .add("dataLength", data.length())
                 .build();
     }
 

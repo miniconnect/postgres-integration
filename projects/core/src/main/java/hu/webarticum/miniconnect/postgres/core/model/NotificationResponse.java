@@ -7,24 +7,16 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Asynchronous notification delivered to a listening frontend. */
 public final class NotificationResponse implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'A';
-
     private final int processId;
 
-    private final String channelName;
+    private final CString channelName;
 
-    private final String payload;
+    private final CString payload;
 
-    public NotificationResponse(int processId, String channelName, String payload) {
+    public NotificationResponse(int processId, CString channelName, CString payload) {
         this.processId = processId;
         this.channelName = Objects.requireNonNull(channelName, "channelName");
         this.payload = Objects.requireNonNull(payload, "payload");
-    }
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
     }
 
     /** Process ID of the notifying backend. */
@@ -33,12 +25,12 @@ public final class NotificationResponse implements TaggedMessage, BackendMessage
     }
 
     /** Name of the notification channel. */
-    public String channelName() {
+    public CString channelName() {
         return channelName;
     }
 
     /** Notification payload string. */
-    public String payload() {
+    public CString payload() {
         return payload;
     }
 
@@ -66,7 +58,7 @@ public final class NotificationResponse implements TaggedMessage, BackendMessage
         return new ToStringBuilder(this)
                 .add("processId", processId)
                 .add("channelName", channelName)
-                .add("payload", payload)
+                .add("payloadByteLength", payload.bytes().length())
                 .build();
     }
 

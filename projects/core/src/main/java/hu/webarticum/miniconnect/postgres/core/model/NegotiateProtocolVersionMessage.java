@@ -8,25 +8,17 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Protocol-version negotiation response. */
 public final class NegotiateProtocolVersionMessage implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'v';
-
     private final int newestSupportedMinorVersion;
 
-    private final ImmutableList<String> unrecognizedProtocolOptions;
+    private final ImmutableList<CString> unrecognizedProtocolOptions;
 
     public NegotiateProtocolVersionMessage(
             int newestSupportedMinorVersion,
-            ImmutableList<String> unrecognizedProtocolOptions) {
+            ImmutableList<CString> unrecognizedProtocolOptions) {
         this.newestSupportedMinorVersion = newestSupportedMinorVersion;
         this.unrecognizedProtocolOptions =
                 Objects.requireNonNull(unrecognizedProtocolOptions, "unrecognizedProtocolOptions");
         unrecognizedProtocolOptions.forEach(v -> Objects.requireNonNull(v, "unrecognizedProtocolOption"));
-    }
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
     }
 
     /** Newest protocol minor version supported by the backend. */
@@ -35,7 +27,7 @@ public final class NegotiateProtocolVersionMessage implements TaggedMessage, Bac
     }
 
     /** Protocol options not recognized by the backend. */
-    public ImmutableList<String> unrecognizedProtocolOptions() {
+    public ImmutableList<CString> unrecognizedProtocolOptions() {
         return unrecognizedProtocolOptions;
     }
 

@@ -8,19 +8,17 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Description of fields returned by rows. */
 public final class RowDescriptionMessage implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'T';
-
     private final ImmutableList<FieldDescription> fields;
 
     public RowDescriptionMessage(ImmutableList<FieldDescription> fields) {
         this.fields = Objects.requireNonNull(fields, "fields");
+        int fieldCount = fields.size();
+        if (fieldCount > 0xFFFF) {
+            throw new IllegalArgumentException(String.format(
+                    "fields size must be at most 65535, but was %d",
+                    fieldCount));
+        }
         fields.forEach(v -> Objects.requireNonNull(v, "field"));
-    }
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
     }
 
     /** Descriptions of the fields in returned rows. */
@@ -47,7 +45,7 @@ public final class RowDescriptionMessage implements TaggedMessage, BackendMessag
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("fields", fields)
+                .add("fieldCount", fields.size())
                 .build();
     }
 

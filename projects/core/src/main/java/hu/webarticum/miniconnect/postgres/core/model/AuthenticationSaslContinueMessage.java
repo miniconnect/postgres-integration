@@ -8,18 +8,10 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Authentication request carrying a SASL challenge. */
 public final class AuthenticationSaslContinueMessage implements AuthenticationMessage {
 
-    public static final int AUTHENTICATION_CODE = 11;
-
     private final ByteString data;
 
     public AuthenticationSaslContinueMessage(ByteString data) {
         this.data = Objects.requireNonNull(data, "data");
-    }
-
-    /** Authentication request code carried in the message. */
-    @Override
-    public int authenticationCode() {
-        return AUTHENTICATION_CODE;
     }
 
     /** SASL challenge data for the selected mechanism. */
@@ -46,7 +38,7 @@ public final class AuthenticationSaslContinueMessage implements AuthenticationMe
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("data", data)
+                .add("dataLength", data.length())
                 .build();
     }
 

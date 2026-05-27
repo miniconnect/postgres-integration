@@ -3,8 +3,12 @@ package hu.webarticum.miniconnect.postgres.core.model;
 /** PostgreSQL data format code. */
 public enum FormatCode {
 
+    /** Text representation. */
     TEXT(0),
+
+    /** Binary representation. */
     BINARY(1),
+
     ;
 
     private final int code;

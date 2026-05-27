@@ -7,18 +7,10 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Ready-for-query message with transaction status. */
 public final class ReadyForQueryMessage implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'Z';
-
     private final TransactionStatus transactionStatus;
 
     public ReadyForQueryMessage(TransactionStatus transactionStatus) {
         this.transactionStatus = Objects.requireNonNull(transactionStatus, "transactionStatus");
-    }
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
     }
 
     /** Current backend transaction status. */

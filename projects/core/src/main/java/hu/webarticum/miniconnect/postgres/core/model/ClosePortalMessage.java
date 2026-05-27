@@ -7,22 +7,14 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Close command for a portal. */
 public final class ClosePortalMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'C';
+    private final CString portalName;
 
-    private final String portalName;
-
-    public ClosePortalMessage(String portalName) {
+    public ClosePortalMessage(CString portalName) {
         this.portalName = Objects.requireNonNull(portalName, "portalName");
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Name of the portal to close. */
-    public String portalName() {
+    public CString portalName() {
         return portalName;
     }
 

@@ -5,14 +5,6 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Authentication request requiring a clear-text password. */
 public final class AuthenticationCleartextPasswordMessage implements AuthenticationMessage {
 
-    public static final int AUTHENTICATION_CODE = 3;
-
-    /** Authentication request code carried in the message. */
-    @Override
-    public int authenticationCode() {
-        return AUTHENTICATION_CODE;
-    }
-
     @Override
     public int hashCode() {
         return AuthenticationCleartextPasswordMessage.class.hashCode();

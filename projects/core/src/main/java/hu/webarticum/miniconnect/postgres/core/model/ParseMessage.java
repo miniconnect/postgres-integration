@@ -8,34 +8,32 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** ParseMessage command creating a prepared statement from a query string. */
 public final class ParseMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'P';
+    private final CString preparedStatementName;
 
-    private final String preparedStatementName;
-
-    private final String query;
+    private final CString query;
 
     private final ImmutableList<Integer> parameterTypeObjectIds;
 
-    public ParseMessage(String preparedStatementName, String query, ImmutableList<Integer> parameterTypeObjectIds) {
+    public ParseMessage(CString preparedStatementName, CString query, ImmutableList<Integer> parameterTypeObjectIds) {
         this.preparedStatementName = Objects.requireNonNull(preparedStatementName, "preparedStatementName");
         this.query = Objects.requireNonNull(query, "query");
         this.parameterTypeObjectIds = Objects.requireNonNull(parameterTypeObjectIds, "parameterTypeObjectIds");
+        int parameterTypeObjectIdCount = parameterTypeObjectIds.size();
+        if (parameterTypeObjectIdCount > 0xFFFF) {
+            throw new IllegalArgumentException(String.format(
+                    "parameterTypeObjectIds size must be at most 65535, but was %d",
+                    parameterTypeObjectIdCount));
+        }
         parameterTypeObjectIds.forEach(v -> Objects.requireNonNull(v, "parameterTypeObjectId"));
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Prepared statement name, empty for the unnamed statement. */
-    public String preparedStatementName() {
+    public CString preparedStatementName() {
         return preparedStatementName;
     }
 
     /** QueryMessage string to parse. */
-    public String query() {
+    public CString query() {
         return query;
     }
 
@@ -67,8 +65,8 @@ public final class ParseMessage implements TaggedMessage, FrontendMessage {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("preparedStatementName", preparedStatementName)
-                .add("query", query)
-                .add("parameterTypeObjectIds", parameterTypeObjectIds)
+                .add("queryByteLength", query.bytes().length())
+                .add("parameterTypeObjectIdCount", parameterTypeObjectIds.size())
                 .build();
     }
 

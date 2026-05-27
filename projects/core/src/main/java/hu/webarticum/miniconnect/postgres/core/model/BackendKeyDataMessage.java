@@ -2,27 +2,23 @@ package hu.webarticum.miniconnect.postgres.core.model;
 
 import java.util.Objects;
 
-import hu.webarticum.miniconnect.lang.ByteString;
 import hu.webarticum.miniconnect.lang.ToStringBuilder;
 
 /** Cancellation key data for later CancelRequest messages. */
 public final class BackendKeyDataMessage implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = 'K';
-
     private final int processId;
 
-    private final ByteString secretKey;
+    private final CancellationKey secretKey;
 
-    public BackendKeyDataMessage(int processId, ByteString secretKey) {
+    /**
+     * Creates a backend cancellation key message.
+     *
+     * <p>The secret key is represented by {@link CancellationKey}, which enforces the protocol length constraints.
+     */
+    public BackendKeyDataMessage(int processId, CancellationKey secretKey) {
         this.processId = processId;
         this.secretKey = Objects.requireNonNull(secretKey, "secretKey");
-    }
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
     }
 
     /** Process ID of this backend. */
@@ -30,8 +26,10 @@ public final class BackendKeyDataMessage implements TaggedMessage, BackendMessag
         return processId;
     }
 
-    /** Secret key of this backend. */
-    public ByteString secretKey() {
+    /**
+     * Secret key of this backend.
+     */
+    public CancellationKey secretKey() {
         return secretKey;
     }
 
@@ -57,7 +55,7 @@ public final class BackendKeyDataMessage implements TaggedMessage, BackendMessag
     public String toString() {
         return new ToStringBuilder(this)
                 .add("processId", processId)
-                .add("secretKey", secretKey)
+                .add("secretKeyLength", secretKey.bytes().length())
                 .build();
     }
 

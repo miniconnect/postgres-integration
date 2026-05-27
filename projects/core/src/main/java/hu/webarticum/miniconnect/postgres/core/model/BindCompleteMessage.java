@@ -5,14 +5,6 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** BindMessage-complete indicator. */
 public final class BindCompleteMessage implements TaggedMessage, BackendMessage {
 
-    public static final int MESSAGE_TYPE = '2';
-
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     @Override
     public int hashCode() {
         return BindCompleteMessage.class.hashCode();

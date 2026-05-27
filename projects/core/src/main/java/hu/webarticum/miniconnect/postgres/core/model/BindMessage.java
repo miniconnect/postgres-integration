@@ -8,11 +8,9 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** BindMessage command that creates a portal from a prepared statement. */
 public final class BindMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'B';
+    private final CString destinationPortalName;
 
-    private final String destinationPortalName;
-
-    private final String sourcePreparedStatementName;
+    private final CString sourcePreparedStatementName;
 
     private final ImmutableList<FormatCode> parameterFormatCodes;
 
@@ -21,34 +19,54 @@ public final class BindMessage implements TaggedMessage, FrontendMessage {
     private final ImmutableList<FormatCode> resultFormatCodes;
 
     public BindMessage(
-            String destinationPortalName,
-            String sourcePreparedStatementName,
+            CString destinationPortalName,
+            CString sourcePreparedStatementName,
             ImmutableList<FormatCode> parameterFormatCodes,
             ImmutableList<NullableValue> parameterValues,
             ImmutableList<FormatCode> resultFormatCodes) {
         this.destinationPortalName = Objects.requireNonNull(destinationPortalName, "destinationPortalName");
         this.sourcePreparedStatementName = Objects.requireNonNull(sourcePreparedStatementName, "sourcePreparedStatementName");
         this.parameterFormatCodes = Objects.requireNonNull(parameterFormatCodes, "parameterFormatCodes");
+        int parameterFormatCodeCount = parameterFormatCodes.size();
+        if (parameterFormatCodeCount > 0xFFFF) {
+            throw new IllegalArgumentException(String.format(
+                    "parameterFormatCodes size must be at most 65535, but was %d",
+                    parameterFormatCodeCount));
+        }
         parameterFormatCodes.forEach(v -> Objects.requireNonNull(v, "parameterFormatCode"));
         this.parameterValues = Objects.requireNonNull(parameterValues, "parameterValues");
+        int parameterValueCount = parameterValues.size();
+        if (parameterValueCount > 0xFFFF) {
+            throw new IllegalArgumentException(String.format(
+                    "parameterValues size must be at most 65535, but was %d",
+                    parameterValueCount));
+        }
         parameterValues.forEach(v -> Objects.requireNonNull(v, "parameterValue"));
+        if (
+                parameterFormatCodeCount != 0 &&
+                parameterFormatCodeCount != 1 &&
+                parameterFormatCodeCount != parameterValueCount) {
+            throw new IllegalArgumentException(String.format(
+                    "parameterFormatCodes size must be 0, 1, or equal to parameterValues size (%d), but was %d",
+                    parameterValueCount, parameterFormatCodeCount));
+        }
         this.resultFormatCodes = Objects.requireNonNull(resultFormatCodes, "resultFormatCodes");
+        int resultFormatCodeCount = resultFormatCodes.size();
+        if (resultFormatCodeCount > 0xFFFF) {
+            throw new IllegalArgumentException(String.format(
+                    "resultFormatCodes size must be at most 65535, but was %d",
+                    resultFormatCodeCount));
+        }
         resultFormatCodes.forEach(v -> Objects.requireNonNull(v, "resultFormatCode"));
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Destination portal name, empty for the unnamed portal. */
-    public String destinationPortalName() {
+    public CString destinationPortalName() {
         return destinationPortalName;
     }
 
     /** Source prepared statement name, empty for the unnamed statement. */
-    public String sourcePreparedStatementName() {
+    public CString sourcePreparedStatementName() {
         return sourcePreparedStatementName;
     }
 
@@ -98,9 +116,9 @@ public final class BindMessage implements TaggedMessage, FrontendMessage {
         return new ToStringBuilder(this)
                 .add("destinationPortalName", destinationPortalName)
                 .add("sourcePreparedStatementName", sourcePreparedStatementName)
-                .add("parameterFormatCodes", parameterFormatCodes)
-                .add("parameterValues", parameterValues)
-                .add("resultFormatCodes", resultFormatCodes)
+                .add("parameterFormatCodeCount", parameterFormatCodes.size())
+                .add("parameterValueCount", parameterValues.size())
+                .add("resultFormatCodeCount", resultFormatCodes.size())
                 .build();
     }
 

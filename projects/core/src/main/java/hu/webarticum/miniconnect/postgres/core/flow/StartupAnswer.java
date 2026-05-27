@@ -3,6 +3,7 @@ package hu.webarticum.miniconnect.postgres.core.flow;
 import java.util.Objects;
 
 import hu.webarticum.miniconnect.lang.ImmutableList;
+import hu.webarticum.miniconnect.postgres.core.model.CString;
 import hu.webarticum.miniconnect.postgres.core.model.ErrorResponse;
 import hu.webarticum.miniconnect.postgres.core.model.ProtocolVersion;
 
@@ -20,13 +21,13 @@ public final class StartupAnswer {
 
     private final ProtocolVersion newestSupportedProtocolVersion;
 
-    private final ImmutableList<String> unrecognizedProtocolOptions;
+    private final ImmutableList<CString> unrecognizedProtocolOptions;
 
     private StartupAnswer(
             Action action,
             ErrorResponse errorResponse,
             ProtocolVersion newestSupportedProtocolVersion,
-            ImmutableList<String> unrecognizedProtocolOptions) {
+            ImmutableList<CString> unrecognizedProtocolOptions) {
         this.action = Objects.requireNonNull(action, "action");
         this.errorResponse = errorResponse;
         this.newestSupportedProtocolVersion = newestSupportedProtocolVersion;
@@ -43,7 +44,7 @@ public final class StartupAnswer {
 
     public static StartupAnswer negotiateProtocolVersion(
             ProtocolVersion newestSupportedProtocolVersion,
-            ImmutableList<String> unrecognizedProtocolOptions) {
+            ImmutableList<CString> unrecognizedProtocolOptions) {
         return new StartupAnswer(
                 Action.NEGOTIATE_PROTOCOL_VERSION,
                 null,
@@ -63,7 +64,7 @@ public final class StartupAnswer {
         return newestSupportedProtocolVersion;
     }
 
-    public ImmutableList<String> unrecognizedProtocolOptions() {
+    public ImmutableList<CString> unrecognizedProtocolOptions() {
         return unrecognizedProtocolOptions;
     }
 

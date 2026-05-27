@@ -7,22 +7,14 @@ import hu.webarticum.miniconnect.lang.ToStringBuilder;
 /** Frontend COPY-failure indicator with an error message. */
 public final class CopyFailMessage implements TaggedMessage, FrontendMessage {
 
-    public static final int MESSAGE_TYPE = 'f';
+    private final CString message;
 
-    private final String message;
-
-    public CopyFailMessage(String message) {
+    public CopyFailMessage(CString message) {
         this.message = Objects.requireNonNull(message, "message");
     }
 
-    /** One-byte message type code used on the wire. */
-    @Override
-    public int messageType() {
-        return MESSAGE_TYPE;
-    }
-
     /** Error message explaining the COPY failure. */
-    public String message() {
+    public CString message() {
         return message;
     }
 
@@ -45,7 +37,7 @@ public final class CopyFailMessage implements TaggedMessage, FrontendMessage {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("message", message)
+                .add("messageByteLength", message.bytes().length())
                 .build();
     }
 
